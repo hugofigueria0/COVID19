@@ -20,4 +20,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void VaiParaMovimentos(View view){
+
+        Intent intent = new Intent(this, MenuMovimentos.class);
+        startActivity(intent);
+
+    }
+
+    public void VaiParaInfetados(View view){
+
+        Intent intent = new Intent(this, MenuMovimentos.class);
+        startActivity(intent);
+
+    }
+
+    public void SaiDaApp(View view){
+        finish();
+        System.exit(0);
+
+    }
+
 }

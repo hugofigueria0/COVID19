@@ -3,4 +3,13 @@
     <string name="BemVindo">Welcome</string>
     <string name="Pessoas">People</string>
     <string name="Resgitar">Registe</string>
+    <string name="Movimentos">Movement</string>
+    <string name="Infetados">Infected</string>
+    <string name="Sair">Leave</string>
+    <string name="Nome">Name</string>
+    <string name="Guardar">Save</string>
+    <string name="Sucesso">Sucess</string>
+    <string name="TipoPessoas">Kind of person</string>
+    <string name="AvisoFaltaOTipo">You have to write the type</string>
+    <string name="FaltaNomeDaPessoa">You have to write the Name</string>
 </resources>
