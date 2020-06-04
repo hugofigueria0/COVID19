@@ -12,4 +12,9 @@
     <string name="TipoPessoas">Kind of person</string>
     <string name="AvisoFaltaOTipo">You have to write the type</string>
     <string name="FaltaNomeDaPessoa">You have to write the Name</string>
+    <string name="title_activity_test">test</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="Editar">Edit the person</string>
 </resources>

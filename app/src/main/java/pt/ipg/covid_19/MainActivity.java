@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void VaiParaPeople(View view){
 
-        Intent intent = new Intent(this, MenuPessoas.class);
+        Intent intent = new Intent(this, menu_ver_pessoas.class);
         startActivity(intent);
 
     }
