@@ -28,6 +28,12 @@ public class menu_ver_pessoas extends AppCompatActivity {
             Intent intent = new Intent(this, MenuPessoas.class);
             startActivity(intent);
             return true;
+        } else if(id == R.id.action_moreEdit) {
+            Intent intent = new Intent(this, MenuPessoasEditar.class);
+            startActivity(intent);
+        }else if(id == R.id.action_moreDelete) {
+            Intent intent = new Intent(this, MenuPessoasEliminar.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
