@@ -16,7 +16,7 @@ public class MenuVerMovimento extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.nomebar, menu);
+        getMenuInflater().inflate(R.menu.movimento, menu);
         return true;
     }
 
