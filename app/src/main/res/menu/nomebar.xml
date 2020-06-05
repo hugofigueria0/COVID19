@@ -17,5 +17,10 @@
         android:icon="@drawable/ic_delete_black_24dp"
         android:title="@string/Pessoas"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_more_Movimento"
+        android:icon="@drawable/ic_access_time_black_24dp"
+        android:title="@string/Movimentos"
+        app:showAsAction="always"/>
 
 </menu>

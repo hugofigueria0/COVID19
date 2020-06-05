@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void VaiParaMovimentos(View view){
 
-        Intent intent = new Intent(this, MenuMovimentos.class);
+        Intent intent = new Intent(this, MenuVerMovimento.class);
         startActivity(intent);
 
     }
