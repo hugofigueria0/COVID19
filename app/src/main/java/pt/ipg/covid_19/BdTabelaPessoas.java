@@ -8,6 +8,7 @@ import android.provider.BaseColumns;
 public class BdTabelaPessoas implements BaseColumns {
 
     public static final String NOME_TABELA ="pessoas";
+
     public static final String CAMPO_NOME = "nome";
     public static final String CAMPO_TIPO_PESSOA = "tipoPessoa";
 

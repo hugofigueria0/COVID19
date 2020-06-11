@@ -38,7 +38,8 @@ public class BdTabelaInfectados implements BaseColumns {
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 CAMPO_INFECTADO + " TEXT NOT NULL," +
                 CAMPO_PESSOA + " TEXT NOT NULL," +
-                "FOREIGN KEY (" + CAMPO_PESSOA_COMPLETO + ") REFERENCES " +
+                CAMPO_ID_PESSOA + " TEXT NOT NULL," +
+                "FOREIGN KEY (" + CAMPO_ID_PESSOA + ") REFERENCES " +
                 BdTabelaPessoas.NOME_TABELA + "("+ BdTabelaPessoas._ID + ")" +
                 ")"
         );

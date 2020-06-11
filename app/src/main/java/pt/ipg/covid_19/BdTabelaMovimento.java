@@ -11,6 +11,7 @@ import java.util.Arrays;
 public class BdTabelaMovimento implements BaseColumns {
 
     public static final String NOME_TABELA ="movimento";
+
     public static final String CAMPO_HORA_ENTRADA = "horaEntrada";
     public static final String CAMPO_HORA_SAIDA = "horaSaida";
     public static final String CAMPO_DATA= "data";
@@ -36,14 +37,16 @@ public class BdTabelaMovimento implements BaseColumns {
     public BdTabelaMovimento (SQLiteDatabase db){this.db = db;}
 
     public void cria(){
+
         db.execSQL("CREATE TABLE " + NOME_TABELA + " ("+
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 CAMPO_HORA_ENTRADA + " TEXT NOT NULL," +
                 CAMPO_HORA_SAIDA + " TEXT NOT NULL," +
                 CAMPO_DATA + " TEXT NOT NULL," +
                 CAMPO_PESSOA + " TEXT NOT NULL," +
-                "FOREIGN KEY (" + CAMPO_PESSOA_COMPLETO + ") REFERENCES " +
-                BdTabelaPessoas.NOME_TABELA + "("+ BdTabelaPessoas._ID + ")" +
+                CAMPO_ID_PESSOA + " TEXT NOT NULL," +
+                "FOREIGN KEY (" + CAMPO_ID_PESSOA + ") REFERENCES " +
+                    BdTabelaPessoas.NOME_TABELA + "("+ BdTabelaPessoas._ID + ")" +
                 ")"
         );
     }
