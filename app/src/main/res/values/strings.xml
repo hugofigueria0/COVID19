@@ -20,7 +20,7 @@
     <string name="EditarBotao">Edit</string>
     <string name="FaltaData">Insert a date</string>
     <string-array name="Infectado_ID">
-        <item> Sim </item>
-        <item> Não </item>
+        <item> Positivo </item>
+        <item> Negativo </item>
     </string-array>
 </resources>
