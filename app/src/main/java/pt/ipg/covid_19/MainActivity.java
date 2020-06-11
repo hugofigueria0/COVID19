@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void VaiParaInfetados(View view){
 
-        Intent intent = new Intent(this, MenuMovimentos.class);
+        Intent intent = new Intent(this, MenuVerInfectados.class);
         startActivity(intent);
 
     }

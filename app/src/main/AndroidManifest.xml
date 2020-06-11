@@ -9,13 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuVerMovimento"></activity>
+        <activity android:name=".MenuAdicionarInfectado"></activity>
+        <activity android:name=".MenuVerInfectados" />
+        <activity android:name=".MenuVerMovimento" />
         <activity android:name=".MenuAdicionarMovimento" />
         <activity android:name=".MenuPessoasEliminar" />
         <activity android:name=".MenuPessoasEditar" />
         <activity android:name=".menu_ver_pessoas" />
         <activity android:name=".MenuInfetados" />
-        <activity android:name=".MenuMovimentos" />
         <activity android:name=".MenuPessoas" />
         <activity android:name=".MainActivity">
             <intent-filter>
