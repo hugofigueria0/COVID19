@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".MenuAdicionarInfectado">
 
+    <Button
+        android:id="@+id/GuardarInfectado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="44dp"
+        android:onClick="GuardarInfectado"
+        android:text="@string/Guardar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerInfectado" />
+
     <Spinner
         android:id="@+id/spinnerInfectado"
         android:layout_width="252dp"
@@ -27,18 +41,4 @@
         app:layout_constraintHorizontal_bias="0.257"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/GuardarInfectado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="44dp"
-        android:onClick="GuardarInfectado"
-        android:text="@string/Guardar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerInfectado" />
 </android.support.constraint.ConstraintLayout>
