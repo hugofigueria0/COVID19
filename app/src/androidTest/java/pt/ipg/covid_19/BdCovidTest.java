@@ -174,6 +174,28 @@ public class BdCovidTest {
         bdInfectado.close();
     }
 
+    @Test
+    public void consegueLerInfectados() {
+        Context appContext = getTargetContext();
+
+        BdPessoasOpenHelper openHelper = new BdPessoasOpenHelper(appContext);
+        SQLiteDatabase bdInfectado = openHelper.getWritableDatabase();
+
+        BdTabelaInfectados tabelaInfectados = new BdTabelaInfectados(bdInfectado);
+
+        Cursor cursor = tabelaInfectados.query(BdTabelaInfectados.TODOS, null, null, null, null, null);
+        int registos = cursor.getCount();
+        cursor.close();
+
+        insereInfectado(bdInfectado, "Sim", "Hugo", "Empregado");
+
+        cursor = tabelaInfectados.query(BdTabelaInfectados.TODOS, null, null, null, null, null);
+        assertEquals(registos + 1, cursor.getCount());
+        cursor.close();
+
+        bdInfectado.close();
+    }
+
 
 
 }
