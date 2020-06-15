@@ -37,8 +37,7 @@ public class BdTabelaInfectados implements BaseColumns {
         db.execSQL("CREATE TABLE " + NOME_TABELA + " ("+
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 CAMPO_INFECTADO + " TEXT NOT NULL," +
-                CAMPO_PESSOA + " TEXT NOT NULL," +
-                CAMPO_ID_PESSOA + " TEXT NOT NULL," +
+                CAMPO_ID_PESSOA + " INT NOT NULL," +
                 "FOREIGN KEY (" + CAMPO_ID_PESSOA + ") REFERENCES " +
                 BdTabelaPessoas.NOME_TABELA + "("+ BdTabelaPessoas._ID + ")" +
                 ")"

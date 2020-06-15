@@ -43,8 +43,7 @@ public class BdTabelaMovimento implements BaseColumns {
                 CAMPO_HORA_ENTRADA + " TEXT NOT NULL," +
                 CAMPO_HORA_SAIDA + " TEXT NOT NULL," +
                 CAMPO_DATA + " TEXT NOT NULL," +
-                CAMPO_PESSOA + " TEXT NOT NULL," +
-                CAMPO_ID_PESSOA + " TEXT NOT NULL," +
+                CAMPO_ID_PESSOA + " INT NOT NULL," +
                 "FOREIGN KEY (" + CAMPO_ID_PESSOA + ") REFERENCES " +
                     BdTabelaPessoas.NOME_TABELA + "("+ BdTabelaPessoas._ID + ")" +
                 ")"
