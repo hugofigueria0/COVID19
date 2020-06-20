@@ -37,7 +37,6 @@ public class Converte {
 
         valores.put(BdTabelaMovimento.CAMPO_ID_PESSOA, movimentoModel.getId_pessoa());
 
-
         return valores;
     }
 
@@ -80,6 +79,29 @@ public class Converte {
         return infectadoModel;
     }
 
+    public static MovimentoModel cursorToMovimento(Cursor cursor) {
+        MovimentoModel movimentoModel = new MovimentoModel();
+
+        movimentoModel.setId(cursor.getLong(cursor.getColumnIndex(BdTabelaMovimento._ID)));
+        movimentoModel.setHoraEntrada(cursor.getString(cursor.getColumnIndex(BdTabelaMovimento.CAMPO_HORA_ENTRADA)));
+        movimentoModel.setHoraSaida(cursor.getString(cursor.getColumnIndex(BdTabelaMovimento.CAMPO_HORA_SAIDA)));
+        movimentoModel.setId_pessoa(cursor.getLong(cursor.getColumnIndex(BdTabelaMovimento.CAMPO_ID_PESSOA)));
+        movimentoModel.setNome_pessoa(cursor.getString(cursor.getColumnIndex(BdTabelaMovimento.CAMPO_PESSOA)));
+        movimentoModel.setData(cursor.getString(cursor.getColumnIndex(BdTabelaMovimento.CAMPO_DATA)));
+
+        return movimentoModel;
+    }
+
+    public static InfectadoModel cursorToInfectado(Cursor cursor) {
+        InfectadoModel infectadoModel = new InfectadoModel();
+
+        infectadoModel.setId(cursor.getLong(cursor.getColumnIndex(BdTabelaInfectados._ID)));
+        infectadoModel.setInfectado(cursor.getString(cursor.getColumnIndex(BdTabelaInfectados.CAMPO_INFECTADO)));
+        infectadoModel.setId_pessoa(cursor.getLong(cursor.getColumnIndex(BdTabelaInfectados.CAMPO_ID_PESSOA)));
+        infectadoModel.setNome_pessoa(cursor.getString(cursor.getColumnIndex(BdTabelaInfectados.CAMPO_PESSOA)));
+
+        return infectadoModel;
+    }
 
 
 }

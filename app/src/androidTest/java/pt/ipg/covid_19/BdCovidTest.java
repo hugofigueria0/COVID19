@@ -89,6 +89,47 @@ public class BdCovidTest {
         bdPessoas.close();
     }
 
+    @Test
+    public void consegueAlterarPessoas() {
+        Context appContext = getTargetContext();
+
+        BdPessoasOpenHelper openHelper = new BdPessoasOpenHelper(appContext);
+        SQLiteDatabase bdPessoas = openHelper.getWritableDatabase();
+
+        BdTabelaPessoas tabelaPessoas = new BdTabelaPessoas(bdPessoas);
+
+        PessoasModel pessoasModel = new PessoasModel();
+        pessoasModel.setNome("Hug");
+        pessoasModel.setTipoPessoa("Visitant");
+
+        long id = inserePessoas(tabelaPessoas, pessoasModel);
+
+        pessoasModel.setNome("Hugo");
+        pessoasModel.setTipoPessoa("Visitante");
+
+        int registosAfetados = tabelaPessoas.update(Converte.pessoasToContentValues(pessoasModel), BdTabelaPessoas._ID + "=?", new String[]{String.valueOf(id)});
+        assertEquals(1, registosAfetados);
+
+        bdPessoas.close();
+    }
+
+    @Test
+    public void consegueEliminarPessoas() {
+        Context appContext = getTargetContext();
+
+        BdPessoasOpenHelper openHelper = new BdPessoasOpenHelper(appContext);
+        SQLiteDatabase bdPessoas = openHelper.getWritableDatabase();
+
+        BdTabelaPessoas tabelaPessoas = new BdTabelaPessoas(bdPessoas);
+
+        long id = inserePessoas(tabelaPessoas, "Ricardo", "Trabalhador");
+
+        int registosEliminados = tabelaPessoas.delete(BdTabelaPessoas._ID + "=?", new String[]{String.valueOf(id)});
+        assertEquals(1, registosEliminados);
+
+        bdPessoas.close();
+    }
+
     //MOVIMENTO
 
     private long insereMovimento(SQLiteDatabase bdMovimento, String horaEntrada, String horaSaida, String Data, String pessoas, String tipoPessoas) {
@@ -143,6 +184,38 @@ public class BdCovidTest {
         bdMovimento.close();
     }
 
+    @Test
+    public void consegueAlterarMovimento() {
+        Context appContext = getTargetContext();
+
+        BdPessoasOpenHelper openHelper = new BdPessoasOpenHelper(appContext);
+        SQLiteDatabase bdMovimento = openHelper.getWritableDatabase();
+
+        long idMovimento = insereMovimento(bdMovimento, "10:20","12:00","20/05/2020","Francisco","Visitante");
+
+        BdTabelaMovimento tabelaMovimento = new BdTabelaMovimento(bdMovimento);
+
+        Cursor cursor = tabelaMovimento.query(BdTabelaMovimento.TODOS, BdTabelaMovimento.CAMPO_ID_COMPLETO + "=?", new String[]{ String.valueOf(idMovimento) }, null, null, null);
+        assertEquals(1, cursor.getCount());
+
+        assertTrue(cursor.moveToNext());
+        MovimentoModel movimentoModel = Converte.cursorToMovimento(cursor);
+        cursor.close();
+
+        assertEquals("10:20", movimentoModel.getHoraEntrada());
+        assertEquals("12:00", movimentoModel.getHoraSaida());
+
+        movimentoModel.setHoraEntrada("11:20");
+        movimentoModel.setHoraSaida("12:20");
+
+        int registosAfetados = tabelaMovimento.update(Converte.movimentosToContentValues(movimentoModel), BdTabelaMovimento.CAMPO_ID_COMPLETO + "=?", new String[]{String.valueOf(movimentoModel.getId())});
+        assertEquals(1, registosAfetados);
+
+        bdMovimento.close();
+    }
+
+
+
     //Infectados
 
     private long insereInfectado(SQLiteDatabase bdInfectado, String infectado, String pessoas, String tipoPessoas) {
@@ -192,6 +265,34 @@ public class BdCovidTest {
         cursor = tabelaInfectados.query(BdTabelaInfectados.TODOS, null, null, null, null, null);
         assertEquals(registos + 1, cursor.getCount());
         cursor.close();
+
+        bdInfectado.close();
+    }
+
+    @Test
+    public void consegueAlterarInfectado() {
+        Context appContext = getTargetContext();
+
+        BdPessoasOpenHelper openHelper = new BdPessoasOpenHelper(appContext);
+        SQLiteDatabase bdInfectado = openHelper.getWritableDatabase();
+
+        long idInfectado = insereInfectado(bdInfectado, "Positivo", "Amaral","Visitante");
+
+        BdTabelaInfectados tabelaInfectados = new BdTabelaInfectados(bdInfectado);
+
+        Cursor cursor = tabelaInfectados.query(BdTabelaInfectados.TODOS, BdTabelaInfectados.CAMPO_ID_COMPLETO + "=?", new String[]{ String.valueOf(idInfectado) }, null, null, null);
+        assertEquals(1, cursor.getCount());
+
+        assertTrue(cursor.moveToNext());
+        InfectadoModel infectadoModel = Converte.cursorToInfectado(cursor);
+        cursor.close();
+
+        assertEquals("Positivo", infectadoModel.getInfectado());
+
+        infectadoModel.setInfectado("Negativo");
+
+        int registosAfetados = tabelaInfectados.update(Converte.infectadosToContentValues(infectadoModel), BdTabelaInfectados.CAMPO_ID_COMPLETO + "=?", new String[]{String.valueOf(infectadoModel.getId())});
+        assertEquals(1, registosAfetados);
 
         bdInfectado.close();
     }
