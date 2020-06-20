@@ -79,6 +79,17 @@ public class Converte {
         return infectadoModel;
     }
 
+    public static PessoasModel cursorToPessoas(Cursor cursor) {
+        PessoasModel pessoasModel = new PessoasModel();
+
+        pessoasModel.setId(cursor.getLong(cursor.getColumnIndex(BdTabelaPessoas._ID)));
+        pessoasModel.setNome(cursor.getString(cursor.getColumnIndex(BdTabelaPessoas.CAMPO_NOME)));
+        pessoasModel.setTipoPessoa(cursor.getString(cursor.getColumnIndex(BdTabelaPessoas.CAMPO_TIPO_PESSOA)));
+
+
+        return pessoasModel;
+    }
+
     public static MovimentoModel cursorToMovimento(Cursor cursor) {
         MovimentoModel movimentoModel = new MovimentoModel();
 

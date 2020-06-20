@@ -30,8 +30,8 @@ public class CovidContentProvider extends ContentProvider {
     private static final int URI_MOVIMENTO = 200;
     private static final int URI_ID_MOVIMENTO = 201;
 
-    private static final int URI_INFECTADO = 400;
-    private static final int URI_ID_INFECTADO= 401;
+    private static final int URI_INFECTADO = 300;
+    private static final int URI_ID_INFECTADO= 301;
 
 
     private static final String CURSOR_DIR = "vnd.android.cursor.dir/";
