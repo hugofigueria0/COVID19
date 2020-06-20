@@ -9,6 +9,7 @@ public class BdPessoasOpenHelper extends SQLiteOpenHelper {
 
     public static final String NOME_BASE_DADOS = "livros.db";
     private static final int VERSAO_BASE_DADOS = 1;
+    private static final boolean DESENVOLVIMENTO = false;
 
 
     public BdPessoasOpenHelper(@Nullable Context context) {
@@ -26,6 +27,28 @@ public class BdPessoasOpenHelper extends SQLiteOpenHelper {
 
         BdTabelaInfectados tabelaInfectados = new BdTabelaInfectados(db);
         tabelaInfectados.cria();
+
+        if (DESENVOLVIMENTO) {
+            seedData(db);
+        }
+
+    }
+
+    private void seedData(SQLiteDatabase db) {
+
+        BdTabelaPessoas tabelaPessoas = new BdTabelaPessoas(db);
+
+        PessoasModel pessoasModel = new PessoasModel();
+
+        pessoasModel.setNome("Hugo Amaral");
+        pessoasModel.setTipoPessoa("Visitante");
+        tabelaPessoas.insert(Converte.pessoasToContentValues(pessoasModel));
+
+        pessoasModel.setNome("Tia Maria");
+        pessoasModel.setTipoPessoa("Trabalhador");
+        tabelaPessoas.insert(Converte.pessoasToContentValues(pessoasModel));
+
+
 
     }
 

@@ -14,7 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 public class CovidContentProvider extends ContentProvider {
-    private static final String AUTHORITY = "pt.ipg.covid";
+    private static final String AUTHORITY = "pt.ipg.covid_19";
     private static final String PESSOAS = "pessoas";
     private static final String MOVIMENTO = "movimento";
     private static final String INFECTADO = "infectado";

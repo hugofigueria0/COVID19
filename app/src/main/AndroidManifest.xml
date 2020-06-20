@@ -25,6 +25,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:authorities="pt.ipg.covid_19"
+            android:name=".CovidContentProvider"
+            android:exported="false"
+            />
     </application>
 
 </manifest>
