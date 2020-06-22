@@ -93,7 +93,7 @@ public class menu_ver_pessoas extends AppCompatActivity  implements LoaderManage
         }else if(id == R.id.action_moreDelete) {
             Intent intent = new Intent(this, MenuPessoasEliminar.class);
 
-            intent.putExtra(ID_PESSOAS, adaptadorPessoas.getPessoaSelecionado().getId());
+           intent.putExtra(ID_PESSOAS, adaptadorPessoas.getPessoaSelecionado().getId());
 
             startActivity(intent);
         }

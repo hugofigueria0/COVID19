@@ -6,4 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".MenuPessoasEliminar">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="240dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/Nome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewNome"
+        android:layout_width="182dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Celeste"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="211dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/TipoPessoas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNome" />
+
+    <TextView
+        android:id="@+id/textViewTipoPessoa"
+        android:layout_width="177dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="20dp"
+        android:text="Orador"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/ApagarNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="108dp"
+        android:layout_marginLeft="108dp"
+        android:layout_marginTop="168dp"
+        android:onClick="Eliminar"
+        android:text="Delete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTipoPessoa" />
+
+    <Button
+        android:id="@+id/SairDoDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="168dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginRight="136dp"
+        android:onClick="Leave"
+        android:text="Leave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTipoPessoa" />
 </android.support.constraint.ConstraintLayout>
