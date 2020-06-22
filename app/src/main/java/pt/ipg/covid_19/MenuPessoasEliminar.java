@@ -68,11 +68,35 @@ public class MenuPessoasEliminar extends AppCompatActivity implements LoaderMana
 
     }
 
+   /* public void Eliminar() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Eliminar Livro");
+        builder.setMessage("Tem a certeza que pretende eliminar o livro '" + pessoasModel.getNome() + "'");
+        builder.setIcon(R.drawable.ic_delete_black_24dp);
+        builder.setPositiveButton("Sim, eliminar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                EliminarPessoa();
+            }
+        });
+
+        builder.setNegativeButton("Não, cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // cancelar
+            }
+        });
+
+        builder.show();
+    }*/
+
      public void Eliminar (View view) {
          int PessoasApagadas = getContentResolver().delete(enderecoPessoaEliminar, null, null);
 
          if (PessoasApagadas == 1) {
-             Toast.makeText(this, "nao sei o que acontece", Toast.LENGTH_SHORT).show();
+             Toast.makeText(this, "Apagado com sucesso", Toast.LENGTH_SHORT).show();
              finish();
          } else {
              Toast.makeText(this, "aconteceu", Toast.LENGTH_LONG).show();

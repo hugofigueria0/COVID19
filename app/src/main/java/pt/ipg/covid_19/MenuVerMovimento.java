@@ -3,10 +3,19 @@ package pt.ipg.covid_19;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MenuVerMovimento extends AppCompatActivity {
+
+    public static final String ID_Movimento = "ID_MOVIMENTO";
+
+    public static final int ID_CURSOR_LOADER_MOVIMENTOS = 0;
+
+    private AdaptadorMovimentos adaptadorMovimentos;
+    private RecyclerView recyclerViewPessoas;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

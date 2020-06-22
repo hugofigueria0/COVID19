@@ -66,9 +66,9 @@ public class MenuAdicionarMovimento extends AppCompatActivity {
 
     public void GuardarData(View view){
 
-        String ConteudoNomeDaPessoa = editDataEntrada.getText().toString();
+        String ConteudoDaData = editDataEntrada.getText().toString();
 
-        if (ConteudoNomeDaPessoa.trim().isEmpty()){
+        if (ConteudoDaData.trim().isEmpty()){
 
             editDataEntrada.setError(getString(R.string.FaltaData));
             editDataEntrada.requestFocus();

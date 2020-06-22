@@ -10,14 +10,15 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
 public class MenuEditarMovimento extends AppCompatActivity {
 
-    private EditText editDataEntrada;
+    private EditText editTextEditarMovimentoData, editTextEditarMovimentoSair;
 
-    private static final String TAG = "MenuAdicionarMovimento";
+    private static final String TAG = "MenuEditarMovimento";
 
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -27,9 +28,12 @@ public class MenuEditarMovimento extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_editar_movimento);
 
-        editDataEntrada = (EditText) findViewById(R.id.dataEntradaEditar);
+        editTextEditarMovimentoData = (EditText) findViewById(R.id.dataEntradaEditar);
+        editTextEditarMovimentoSair = (EditText) findViewById(R.id.dataSaidaEditar);
 
-        mDisplayDate = (TextView) findViewById(R.id.SelectDate);
+
+
+        mDisplayDate = (TextView) findViewById(R.id.selectDateEditar);
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,5 +65,36 @@ public class MenuEditarMovimento extends AppCompatActivity {
         };
 
 
+
+    }
+
+    public void EditarDataMovimento(View view){
+
+        String ConteudoDaDataEntrada = editTextEditarMovimentoData.getText().toString();
+        String ConteudoDaDataSaida = editTextEditarMovimentoSair.getText().toString();
+
+
+
+        if (ConteudoDaDataEntrada.trim().isEmpty()){
+
+            editTextEditarMovimentoData.setError(getString(R.string.FaltaData));
+            editTextEditarMovimentoData.requestFocus();
+            return;
+
+        }else if(ConteudoDaDataSaida.trim().isEmpty()){
+
+            editTextEditarMovimentoSair.setError(getString(R.string.FaltaData));
+            editTextEditarMovimentoSair.requestFocus();
+            return;
+
+        }
+
+
+        Toast.makeText(this, R.string.Sucesso, Toast.LENGTH_LONG).show();
+        finish();
+    }
+
+    public void CancelarEditarMovimento(View view){
+        finish();
     }
 }
