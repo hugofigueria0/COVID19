@@ -35,12 +35,38 @@ public class MenuPessoasEditar extends AppCompatActivity implements LoaderManage
         setContentView(R.layout.activity_menu_pessoas_editar);
 
 
-        getSupportLoaderManager().initLoader(ID_CURSOR_LOADER_PESSOAS, null, this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         editNomeDaPessoaEdit = (EditText) findViewById(R.id.PessoasEditarNome);
         editTipoDePessoaEdit = (EditText) findViewById(R.id.PessoasEditarTipo);
 
-        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_PESSOAS, null, this);
+        getSupportLoaderManager().initLoader(ID_CURSOR_LOADER_PESSOAS, null, this);
+
+        Intent intent = getIntent();
+
+        long idPessoa = intent.getLongExtra(menu_ver_pessoas.ID_PESSOAS,-1);
+
+        if(idPessoa == -1){
+            Toast.makeText(this, "Erro: não foi possivel ler o carro!", Toast.LENGTH_LONG ).show();
+            finish();
+            return;
+        }
+
+        enderecoPessoaEditar = Uri.withAppendedPath(CovidContentProvider.ENDERECO_PESSOAS, String.valueOf(idPessoa));
+
+        Cursor cursor = getContentResolver().query(enderecoPessoaEditar, BdTabelaPessoas.TODOS, null, null, null);
+
+        if(!cursor.moveToNext()){
+            Toast.makeText(this,"Erro não foi possivel ler o Carro!!", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+
+        pessoasModel = PessoasModel.fromCursor(cursor);
+
+        editNomeDaPessoaEdit.setText(pessoasModel.getNome());
+        editTipoDePessoaEdit.setText(pessoasModel.getTipoPessoa());
+
     }
 
     public void EditPessoas(View view){
@@ -67,6 +93,7 @@ public class MenuPessoasEditar extends AppCompatActivity implements LoaderManage
         String nome = editNomeDaPessoaEdit.getText().toString();
         String tipoPessoa = editTipoDePessoaEdit.getText().toString();
 
+        // SAVE
 
         PessoasModel pessoasModel = new PessoasModel();
 
@@ -86,7 +113,6 @@ public class MenuPessoasEditar extends AppCompatActivity implements LoaderManage
             e.printStackTrace();
         }
 
-        Toast.makeText(this, R.string.Sucesso, Toast.LENGTH_LONG).show();
         finish();
     }
 

@@ -50,6 +50,12 @@ public class AdaptadorPessoas extends RecyclerView.Adapter<AdaptadorPessoas.View
         return cursor.getCount();
     }
 
+    public PessoasModel getPessoaSelecionado() {
+        if (viewHolderPessoaSelecionado == null) return null;
+
+        return viewHolderPessoaSelecionado.pessoasModel;
+    }
+
     private ViewHolderPessoas viewHolderPessoaSelecionado = null;
 
     public class ViewHolderPessoas extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -78,19 +84,16 @@ public class AdaptadorPessoas extends RecyclerView.Adapter<AdaptadorPessoas.View
 
         @Override
         public void onClick(View v) {
-            if (viewHolderPessoaSelecionado == this) {
-                return;
-            }
-
             if (viewHolderPessoaSelecionado != null) {
                 viewHolderPessoaSelecionado.desSeleciona();
             }
 
             viewHolderPessoaSelecionado = this;
+
+            ((menu_ver_pessoas) context).atualizaOpcoesMenu();
+
             seleciona();
 
-            menu_ver_pessoas menu_ver_pessoas = (menu_ver_pessoas) AdaptadorPessoas.this.context;
-            menu_ver_pessoas.pessoaAlterada(pessoasModel);
 
         }
 

@@ -16,27 +16,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class menu_ver_pessoas extends AppCompatActivity  implements LoaderManager.LoaderCallbacks<Cursor>{
+
     public static final String ID_PESSOAS = "ID_PESSOAS";
 
     public static final int ID_CURSOR_LOADER_PESSOAS = 0;
 
     private AdaptadorPessoas adaptadorPessoas;
     private RecyclerView recyclerViewPessoas;
-
-    private int menuActual = R.menu.nomebar;
     private Menu menu;
-    private PessoasModel pessoasModel = null;
 
-    public PessoasModel getPessoasModel() {
-        return pessoasModel;
-    }
 
-    public void setMenuActual(int menuActual) {
-        if (menuActual != this.menuActual) {
-            this.menuActual = menuActual;
-            invalidateOptionsMenu();
-        }
-    }
+
+
 
 
     @Override
@@ -58,26 +49,26 @@ public class menu_ver_pessoas extends AppCompatActivity  implements LoaderManage
 
     }
 
-    public void pessoaAlterada(PessoasModel pessoasModel) {
-        this.pessoasModel = pessoasModel;
-
-        boolean mostraEditarEliminar = (pessoasModel != null);
-
-        menu.findItem(R.id.action_moreEdit).setVisible(mostraEditarEliminar);
-        menu.findItem(R.id.action_moreDelete).setVisible(mostraEditarEliminar);
-    }
-
-
     @Override
     protected void onResume() {
         getSupportLoaderManager().restartLoader(ID_CURSOR_LOADER_PESSOAS, null, this);
         super.onResume();
     }
 
+    public void atualizaOpcoesMenu() {
+        PessoasModel pessoasModel = adaptadorPessoas.getPessoaSelecionado();
+
+        boolean mostraAlterarEliminar = (pessoasModel != null);
+        menu.findItem(R.id.action_moreEdit).setVisible(mostraAlterarEliminar);
+        menu.findItem(R.id.action_moreDelete).setVisible(mostraAlterarEliminar);
+
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(menuActual, menu);
+        getMenuInflater().inflate(R.menu.nomebar, menu);
 
         this.menu = menu;
         return true;
@@ -96,9 +87,14 @@ public class menu_ver_pessoas extends AppCompatActivity  implements LoaderManage
         } else if(id == R.id.action_moreEdit) {
             Intent intent = new Intent(this, MenuPessoasEditar.class);
 
+            intent.putExtra(ID_PESSOAS, adaptadorPessoas.getPessoaSelecionado().getId());
+
             startActivity(intent);
         }else if(id == R.id.action_moreDelete) {
             Intent intent = new Intent(this, MenuPessoasEliminar.class);
+
+            intent.putExtra(ID_PESSOAS, adaptadorPessoas.getPessoaSelecionado().getId());
+
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
