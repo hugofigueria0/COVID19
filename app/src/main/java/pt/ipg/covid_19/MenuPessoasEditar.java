@@ -34,24 +34,13 @@ public class MenuPessoasEditar extends AppCompatActivity implements LoaderManage
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_pessoas_editar);
 
+
+        getSupportLoaderManager().initLoader(ID_CURSOR_LOADER_PESSOAS, null, this);
+
         editNomeDaPessoaEdit = (EditText) findViewById(R.id.PessoasEditarNome);
         editTipoDePessoaEdit = (EditText) findViewById(R.id.PessoasEditarTipo);
-        
-        Intent intent = getIntent();
 
-        long idPessoas = intent.getLongExtra(menu_ver_pessoas.ID_PESSOAS,-1);
-
-        if(idPessoas == -1){
-            Toast.makeText(this, "Erro: não foi possivel ler a pessoa!", Toast.LENGTH_LONG ).show();
-            finish();
-            return;
-        }
-
-        enderecoPessoaEditar = Uri.withAppendedPath(CovidContentProvider.ENDERECO_PESSOAS, String.valueOf(idPessoas));
-
-        Cursor cursor = getContentResolver().query(enderecoPessoaEditar, BdTabelaPessoas.TODOS, null, null, null);
-
-
+        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_PESSOAS, null, this);
     }
 
     public void EditPessoas(View view){

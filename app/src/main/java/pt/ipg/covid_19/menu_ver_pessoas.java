@@ -104,6 +104,8 @@ public class menu_ver_pessoas extends AppCompatActivity  implements LoaderManage
         return super.onOptionsItemSelected(item);
     }
 
+
+
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int i, @Nullable Bundle bundle) {

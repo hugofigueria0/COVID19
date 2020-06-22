@@ -91,6 +91,7 @@ public class AdaptadorPessoas extends RecyclerView.Adapter<AdaptadorPessoas.View
 
             menu_ver_pessoas menu_ver_pessoas = (menu_ver_pessoas) AdaptadorPessoas.this.context;
             menu_ver_pessoas.pessoaAlterada(pessoasModel);
+
         }
 
         private void seleciona() {
