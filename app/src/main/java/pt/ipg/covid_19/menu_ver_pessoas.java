@@ -16,10 +16,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class menu_ver_pessoas extends AppCompatActivity  implements LoaderManager.LoaderCallbacks<Cursor>{
+    public static final String ID_PESSOAS = "ID_PESSOAS";
+
     public static final int ID_CURSOR_LOADER_PESSOAS = 0;
 
     private AdaptadorPessoas adaptadorPessoas;
     private RecyclerView recyclerViewPessoas;
+
+    private int menuActual = R.menu.nomebar;
+    private Menu menu;
+    private PessoasModel pessoasModel = null;
+
+    public PessoasModel getPessoasModel() {
+        return pessoasModel;
+    }
+
+    public void setMenuActual(int menuActual) {
+        if (menuActual != this.menuActual) {
+            this.menuActual = menuActual;
+            invalidateOptionsMenu();
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +52,34 @@ public class menu_ver_pessoas extends AppCompatActivity  implements LoaderManage
         recyclerViewPessoas.setLayoutManager(new LinearLayoutManager(this));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        adaptadorPessoas.setCursor(null);
+
+        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_PESSOAS, null, this);
+
     }
+
+    public void pessoaAlterada(PessoasModel pessoasModel) {
+        this.pessoasModel = pessoasModel;
+
+        boolean mostraEditarEliminar = (pessoasModel != null);
+
+        menu.findItem(R.id.action_moreEdit).setVisible(mostraEditarEliminar);
+        menu.findItem(R.id.action_moreDelete).setVisible(mostraEditarEliminar);
+    }
+
+
+    @Override
+    protected void onResume() {
+        getSupportLoaderManager().restartLoader(ID_CURSOR_LOADER_PESSOAS, null, this);
+        super.onResume();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.nomebar, menu);
+        getMenuInflater().inflate(menuActual, menu);
+
+        this.menu = menu;
         return true;
     }
 
@@ -54,6 +95,7 @@ public class menu_ver_pessoas extends AppCompatActivity  implements LoaderManage
             return true;
         } else if(id == R.id.action_moreEdit) {
             Intent intent = new Intent(this, MenuPessoasEditar.class);
+
             startActivity(intent);
         }else if(id == R.id.action_moreDelete) {
             Intent intent = new Intent(this, MenuPessoasEliminar.class);

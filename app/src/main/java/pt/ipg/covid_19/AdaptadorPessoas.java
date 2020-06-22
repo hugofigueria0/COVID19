@@ -78,11 +78,23 @@ public class AdaptadorPessoas extends RecyclerView.Adapter<AdaptadorPessoas.View
 
         @Override
         public void onClick(View v) {
+            if (viewHolderPessoaSelecionado == this) {
+                return;
+            }
 
+            if (viewHolderPessoaSelecionado != null) {
+                viewHolderPessoaSelecionado.desSeleciona();
+            }
+
+            viewHolderPessoaSelecionado = this;
+            seleciona();
+
+            menu_ver_pessoas menu_ver_pessoas = (menu_ver_pessoas) AdaptadorPessoas.this.context;
+            menu_ver_pessoas.pessoaAlterada(pessoasModel);
         }
 
         private void seleciona() {
-            itemView.setBackgroundResource(R.color.colorAccent);
+            itemView.setBackgroundResource(R.color.colorPrimaryDark);
         }
 
         private void desSeleciona() {

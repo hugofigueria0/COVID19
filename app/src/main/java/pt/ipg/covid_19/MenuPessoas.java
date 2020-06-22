@@ -3,6 +3,8 @@ package pt.ipg.covid_19;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,7 +13,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 public class MenuPessoas extends AppCompatActivity  {
+
     private EditText editNomeDaPessoa, editTipoDePessoa;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +51,10 @@ public class MenuPessoas extends AppCompatActivity  {
 
         }
 
+        // save data
+
         PessoasModel pessoasModel = new PessoasModel();
+
         pessoasModel.setNome(ConteudoNomeDaPessoa);
         pessoasModel.setTipoPessoa(ConteudoTipoDePessoa);
 

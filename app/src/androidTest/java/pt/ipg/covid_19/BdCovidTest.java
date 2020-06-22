@@ -46,6 +46,7 @@ public class BdCovidTest {
     }
 
     private long inserePessoas(BdTabelaPessoas tabelaPessoas, String nome, String tipoPessoa) {
+
         PessoasModel pessoasModel = new PessoasModel();
         pessoasModel.setNome(nome);
         pessoasModel.setTipoPessoa(tipoPessoa);
@@ -55,6 +56,7 @@ public class BdCovidTest {
 
     @Test
     public void consegueInserirPessoas() {
+
         Context appContext = getTargetContext();
 
         BdPessoasOpenHelper openHelper = new BdPessoasOpenHelper(appContext);
