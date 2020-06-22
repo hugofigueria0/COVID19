@@ -28,6 +28,10 @@ public class MenuVerMovimento extends AppCompatActivity {
             Intent intent = new Intent(this, MenuAdicionarMovimento.class);
             startActivity(intent);
             return true;
+        }if (id == R.id.action_more_MovimentoInserir) {
+            Intent intent = new Intent(this, MenuEditarMovimento.class);
+            startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

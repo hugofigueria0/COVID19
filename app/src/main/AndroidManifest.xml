@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuAdicionarInfectado"></activity>
+        <activity android:name=".MenuEditarMovimento"></activity>
+        <activity android:name=".MenuAdicionarInfectado" />
         <activity android:name=".MenuVerInfectados" />
         <activity android:name=".MenuVerMovimento" />
         <activity android:name=".MenuAdicionarMovimento" />
@@ -25,11 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
-            android:authorities="pt.ipg.covid_19"
             android:name=".CovidContentProvider"
-            android:exported="false"
-            />
+            android:authorities="pt.ipg.covid_19"
+            android:exported="false" />
     </application>
 
 </manifest>
