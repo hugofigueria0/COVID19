@@ -10,8 +10,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class AdaptadorMovimentos extends RecyclerView.Adapter<AdaptadorMovimentos.ViewHolderMovimento>{
+
     private final Context context;
     private Cursor cursor = null;
+
+    public AdaptadorMovimentos(Context context) {
+        this.context = context;
+    }
 
     public void setCursor(Cursor cursor) {
         if (cursor != this.cursor) {
@@ -20,14 +25,9 @@ public class AdaptadorMovimentos extends RecyclerView.Adapter<AdaptadorMovimento
         }
     }
 
-    public AdaptadorMovimentos(Context context) {
-        this.context = context;
-    }
-
-
     @NonNull
     @Override
-    public AdaptadorMovimentos.ViewHolderMovimento onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolderMovimento onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemMovimento = LayoutInflater.from(context).inflate(R.layout.item_movimentos, parent, false);
 
         return new ViewHolderMovimento(itemMovimento);
@@ -37,9 +37,8 @@ public class AdaptadorMovimentos extends RecyclerView.Adapter<AdaptadorMovimento
     public void onBindViewHolder(@NonNull ViewHolderMovimento holder, int position) {
         cursor.moveToPosition(position);
         MovimentoModel movimentoModel = Converte.cursorToMovimento(cursor);
-        holder.setMovimento(movimentoModel);
+        holder.setMovimentoModel(movimentoModel);
     }
-
 
     @Override
     public int getItemCount() {
@@ -50,67 +49,34 @@ public class AdaptadorMovimentos extends RecyclerView.Adapter<AdaptadorMovimento
         return cursor.getCount();
     }
 
-    /*public MovimentoModel getMovimentoelecionado() {
-        if (viewHolderMovimentoSelecionado == null) return null;
-
-        return viewHolderMovimentoSelecionado.movimentoModel;
-
-    }*/
-
-    private ViewHolderMovimento viewHolderMovimentoSelecionado = null;
-
-
-
-    public class ViewHolderMovimento extends RecyclerView.ViewHolder  {
+    public class ViewHolderMovimento extends RecyclerView.ViewHolder {
         private MovimentoModel movimentoModel = null;
 
-        private final TextView textViewDataEntrada;
-        private final TextView textViewDataSaida;
-        private final TextView textViewData;
-        private final TextView textViewNomePessoa;
+        private final TextView textViewDadosNomeMovimento;
+        private final TextView textViewHoraEntradaMovimento;
+        private final TextView textViewHoraSaidaMovimenbto;
+        private final TextView textViewDataMovimento;
 
         public ViewHolderMovimento(@NonNull View itemView) {
             super(itemView);
 
-            textViewDataEntrada = (TextView)itemView.findViewById(R.id.dataEntradaEditar);
-            textViewDataSaida = (TextView)itemView.findViewById(R.id.dataSaidaEditar);
-            textViewData = (TextView)itemView.findViewById(R.id.selectDateEditar);
-            textViewNomePessoa = (TextView)itemView.findViewById(R.id.textViewDadosNomeMovimento);
+            textViewDadosNomeMovimento = (TextView)itemView.findViewById(R.id.textViewDadosNomeMovimento);
+            textViewHoraEntradaMovimento = (TextView)itemView.findViewById(R.id.textViewHoraEntradaMovimento);
+            textViewHoraSaidaMovimenbto = (TextView)itemView.findViewById(R.id.textViewHoraSaidaMovimenbto);
+            textViewDataMovimento = (TextView)itemView.findViewById(R.id.textViewDataMovimento);
 
-          //  itemView.setOnClickListener(this);
+
         }
 
-        public void setMovimento(MovimentoModel movimentoModel) {
+        public void setMovimentoModel(MovimentoModel movimentoModel) {
             this.movimentoModel = movimentoModel;
 
-            textViewDataEntrada.setText(movimentoModel.getHoraEntrada());
-            textViewDataSaida.setText(movimentoModel.getHoraSaida());
-            textViewData.setText(movimentoModel.getData());
-            textViewNomePessoa.setText(String.valueOf(movimentoModel.getNome_pessoa()));
+            textViewDadosNomeMovimento.setText(String.valueOf(movimentoModel.getNome_pessoa()));
+            textViewHoraEntradaMovimento.setText(movimentoModel.getHoraEntrada());
+            textViewHoraSaidaMovimenbto.setText(movimentoModel.getHoraSaida());
+            textViewDataMovimento.setText(movimentoModel.getData());
         }
 
-       /* @Override
-        public void onClick(View v) {
-            if (viewHolderMovimentoSelecionado != null) {
-                viewHolderMovimentoSelecionado.desSeleciona();
-            }
-
-            viewHolderMovimentoSelecionado = this;
-
-            ((menu_ver_pessoas) context).atualizaOpcoesMenu();
-
-            seleciona();
-
-
-        }
-
-        private void seleciona() {
-            itemView.setBackgroundResource(R.color.colorAccent);
-        }
-
-        private void desSeleciona() {
-            itemView.setBackgroundResource(android.R.color.white);
-        }*/
     }
 
 }

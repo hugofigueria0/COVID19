@@ -42,7 +42,7 @@ public class BdPessoasOpenHelper extends SQLiteOpenHelper {
 
         pessoasModel.setNome("Hugo Amaral");
         pessoasModel.setTipoPessoa("Visitante");
-        tabelaPessoas.insert(Converte.pessoasToContentValues(pessoasModel));
+        long idPessoa2 = tabelaPessoas.insert(Converte.pessoasToContentValues(pessoasModel));
 
         pessoasModel.setNome("Tia Maria");
         pessoasModel.setTipoPessoa("Trabalhador");
@@ -58,6 +58,23 @@ public class BdPessoasOpenHelper extends SQLiteOpenHelper {
         movimentoModel.setData("26/05/2020");
         tabelaMovimento.insert(Converte.movimentosToContentValues(movimentoModel));
 
+        movimentoModel.setId_pessoa(idPessoa2);
+        movimentoModel.setHoraEntrada("15:20");
+        movimentoModel.setHoraSaida("16:30");
+        movimentoModel.setData("20/04/2020");
+        tabelaMovimento.insert(Converte.movimentosToContentValues(movimentoModel));
+
+        BdTabelaInfectados tabelaInfectados = new BdTabelaInfectados(db);
+
+        InfectadoModel infectadoModel = new InfectadoModel();
+
+        infectadoModel.setId_pessoa(idpessoa);
+        infectadoModel.setInfectado("Positivo");
+        tabelaInfectados.insert(Converte.infectadosToContentValues(infectadoModel));
+
+        infectadoModel.setId_pessoa(idPessoa2);
+        infectadoModel.setInfectado("Negativo");
+        tabelaInfectados.insert(Converte.infectadosToContentValues(infectadoModel));
 
     }
 
