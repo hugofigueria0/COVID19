@@ -1,5 +1,8 @@
 package pt.ipg.covid_19;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+
 public class MovimentoModel {
 
     private long id = -1;
@@ -55,5 +58,45 @@ public class MovimentoModel {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public ContentValues getContentValues(){
+        ContentValues valores = new ContentValues();
+        valores.put(BdTabelaMovimento.CAMPO_HORA_ENTRADA, horaEntrada);
+        valores.put(BdTabelaMovimento.CAMPO_HORA_SAIDA, horaSaida);
+        valores.put(BdTabelaMovimento.CAMPO_DATA, data);
+
+
+        return valores;
+    }
+
+    public static MovimentoModel fromCursor(Cursor cursor){
+
+        long id = cursor.getLong(
+                cursor.getColumnIndex(BdTabelaMovimento._ID)
+        );
+
+        String DataEntrada = cursor.getString(
+                cursor.getColumnIndex(BdTabelaMovimento.CAMPO_HORA_ENTRADA)
+        );
+
+        String DataSaida = cursor.getString(
+                cursor.getColumnIndex(BdTabelaMovimento.CAMPO_HORA_SAIDA)
+        );
+
+        String Data = cursor.getString(
+                cursor.getColumnIndex(BdTabelaMovimento.CAMPO_DATA)
+        );
+
+
+        MovimentoModel movimentoModel = new MovimentoModel();
+
+        movimentoModel.setId(id);
+        movimentoModel.setHoraEntrada(DataEntrada);
+        movimentoModel.setHoraSaida(DataSaida);
+        movimentoModel.setData(Data);
+
+
+        return movimentoModel;
     }
 }

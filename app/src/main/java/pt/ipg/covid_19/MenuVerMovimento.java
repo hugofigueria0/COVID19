@@ -17,6 +17,7 @@ import android.view.MenuItem;
 
 public class MenuVerMovimento extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    public static final String ID_MOVIMENTO = "ID_MOVIMENTO";
     public static final int ID_CURSOR_LOADER_MOVIMENTOS = 0;
     private AdaptadorMovimentos adaptadorMovimentos;
     private RecyclerView recyclerViewMovimento;
@@ -64,6 +65,7 @@ public class MenuVerMovimento extends AppCompatActivity implements LoaderManager
 
         if (id == R.id.action_more_Movimento) {
             Intent intent = new Intent(this, MenuAdicionarMovimento.class);
+            intent.putExtra(ID_MOVIMENTO, adaptadorMovimentos.getMovimentoSelecionado().getId());
             startActivity(intent);
             return true;
         }if (id == R.id.action_more_MovimentoInserir) {

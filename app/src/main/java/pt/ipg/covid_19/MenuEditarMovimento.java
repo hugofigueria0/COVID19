@@ -1,8 +1,17 @@
 package pt.ipg.covid_19;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +23,11 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class MenuEditarMovimento extends AppCompatActivity {
+public class MenuEditarMovimento extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+
+    private static final int ID_CURSOR_LOADER_MOVIMENTOS = 0;
+
+    private MovimentoModel movimentoModel;
 
     private EditText editTextEditarMovimentoData, editTextEditarMovimentoSair;
 
@@ -23,13 +36,17 @@ public class MenuEditarMovimento extends AppCompatActivity {
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
+    private Uri enderecoMovimentoEditar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_editar_movimento);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         editTextEditarMovimentoData = (EditText) findViewById(R.id.dataEntradaEditar);
         editTextEditarMovimentoSair = (EditText) findViewById(R.id.dataSaidaEditar);
+
 
 
 
@@ -64,6 +81,35 @@ public class MenuEditarMovimento extends AppCompatActivity {
             }
         };
 
+        getSupportLoaderManager().initLoader(ID_CURSOR_LOADER_MOVIMENTOS, null, this);
+
+        Intent intent = getIntent();
+
+        long idMovimento= intent.getLongExtra(MenuVerMovimento.ID_MOVIMENTO,-1);
+
+        if(idMovimento == -1){
+            Toast.makeText(this, "Erro: não foi possivel ler o Movimento!", Toast.LENGTH_LONG ).show();
+            finish();
+            return;
+        }
+
+        enderecoMovimentoEditar = Uri.withAppendedPath(CovidContentProvider.ENDERECO_MOVIMENTO, String.valueOf(idMovimento));
+
+        Cursor cursor = getContentResolver().query(enderecoMovimentoEditar, BdTabelaMovimento.TODOS, null, null, null);
+
+        if(!cursor.moveToNext()){
+            Toast.makeText(this,"Erro não foi possivel ler o Movimento!!", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+
+        movimentoModel = MovimentoModel.fromCursor(cursor);
+
+        editTextEditarMovimentoData.setText(movimentoModel.getHoraEntrada());
+        editTextEditarMovimentoSair.setText(movimentoModel.getHoraSaida());
+        mDisplayDate.setText(movimentoModel.getData());
+
+
 
 
     }
@@ -72,6 +118,7 @@ public class MenuEditarMovimento extends AppCompatActivity {
 
         String ConteudoDaDataEntrada = editTextEditarMovimentoData.getText().toString();
         String ConteudoDaDataSaida = editTextEditarMovimentoSair.getText().toString();
+        String ConteudoDaData= mDisplayDate.getText().toString();
 
 
 
@@ -89,6 +136,30 @@ public class MenuEditarMovimento extends AppCompatActivity {
 
         }
 
+        String dataEntrada = editTextEditarMovimentoData.getText().toString();
+        String dataSaida = editTextEditarMovimentoSair.getText().toString();
+        String data = mDisplayDate.getText().toString();
+
+        // save the data
+        MovimentoModel movimentoModel = new MovimentoModel();
+
+        movimentoModel.setHoraEntrada(dataEntrada);
+        movimentoModel.setHoraSaida(dataSaida);
+        movimentoModel.setData(data);
+
+
+
+        try {
+            getContentResolver().update(enderecoMovimentoEditar, movimentoModel.getContentValues(), null, null);
+
+            Toast.makeText(this, ("Deu certo ?!?"), Toast.LENGTH_SHORT).show();
+            finish();
+
+        } catch (Exception e) {
+            Toast.makeText(this,("correu ?!?!?!"), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+
 
         Toast.makeText(this, R.string.Sucesso, Toast.LENGTH_LONG).show();
         finish();
@@ -96,5 +167,22 @@ public class MenuEditarMovimento extends AppCompatActivity {
 
     public void CancelarEditarMovimento(View view){
         finish();
+    }
+
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, @Nullable Bundle bundle) {
+        return new CursorLoader(this, CovidContentProvider.ENDERECO_MOVIMENTO, BdTabelaMovimento.TODOS, null, null, BdTabelaMovimento.CAMPO_HORA_ENTRADA);
+
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
+
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+
     }
 }

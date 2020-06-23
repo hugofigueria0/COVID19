@@ -28,6 +28,8 @@ public class MenuPessoasEliminar extends AppCompatActivity implements LoaderMana
     private PessoasModel pessoasModel;
     private Uri enderecoPessoaEliminar;
 
+    private Button buttonEliminar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,13 @@ public class MenuPessoasEliminar extends AppCompatActivity implements LoaderMana
         TextView textViewNome = (TextView) findViewById(R.id.textViewNome);
         TextView textViewTipoPessoa = (TextView) findViewById(R.id.textViewTipoPessoa);
 
+        buttonEliminar = (Button) findViewById(R.id.ApagarNome);
+        buttonEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eliminar();
+            }
+        });
 
         Intent intent = getIntent();
 
@@ -68,7 +77,7 @@ public class MenuPessoasEliminar extends AppCompatActivity implements LoaderMana
 
     }
 
-   /* public void Eliminar() {
+    public void eliminar() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -90,9 +99,9 @@ public class MenuPessoasEliminar extends AppCompatActivity implements LoaderMana
         });
 
         builder.show();
-    }*/
+    }
 
-     public void Eliminar (View view) {
+     public void EliminarPessoa () {
          int PessoasApagadas = getContentResolver().delete(enderecoPessoaEliminar, null, null);
 
          if (PessoasApagadas == 1) {

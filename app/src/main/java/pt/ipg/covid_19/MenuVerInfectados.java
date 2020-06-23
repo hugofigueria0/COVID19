@@ -19,6 +19,7 @@ import android.widget.Spinner;
 
 public class MenuVerInfectados extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
+
     public static final int ID_CURSOR_LOADER_INFECTADO = 0;
     private AdaptadorInfectado adaptadorInfectado;
     private RecyclerView recyclerViewInfectado;
