@@ -20,9 +20,9 @@ import android.widget.Spinner;
 public class MenuVerInfectados extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
     public static final int ID_CURSOR_LOADER_INFECTADO = 0;
-
     private AdaptadorInfectado adaptadorInfectado;
     private RecyclerView recyclerViewInfectado;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,9 @@ public class MenuVerInfectados extends AppCompatActivity implements LoaderManage
 
 
     }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.infectado, menu);

@@ -49,7 +49,7 @@ public class AdaptadorMovimentos extends RecyclerView.Adapter<AdaptadorMovimento
         return cursor.getCount();
     }
 
-    public MovimentoModel getInfectadoSelecionado() {
+    public MovimentoModel getMovimentoSelecionado() {
         if (viewHolderMovimentoSelecionado == null) return null;
 
         return viewHolderMovimentoSelecionado.movimentoModel;
@@ -103,12 +103,12 @@ public class AdaptadorMovimentos extends RecyclerView.Adapter<AdaptadorMovimento
         }
 
         private void seleciona() {
-            itemView.setBackgroundResource(R.color.colorPrimaryDark);
-        }
-
-        private void desSeleciona() {
-            itemView.setBackgroundResource(android.R.color.white);
-        }
+        itemView.setBackgroundResource(R.color.colorPrimaryDark);
     }
+
+    private void desSeleciona() {
+        itemView.setBackgroundResource(android.R.color.white);
+    }
+}
 
 }

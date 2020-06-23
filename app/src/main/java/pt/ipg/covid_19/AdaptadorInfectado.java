@@ -50,7 +50,17 @@ public class AdaptadorInfectado extends RecyclerView.Adapter<AdaptadorInfectado.
         return cursor.getCount();
     }
 
-    public class ViewHolderInfectado extends RecyclerView.ViewHolder {
+    public InfectadoModel getInfectadoSelecionado() {
+        if (viewHolderInfectadoSelecionado == null) return null;
+
+        return viewHolderInfectadoSelecionado.infectadoModel;
+    }
+
+
+    private AdaptadorInfectado.ViewHolderInfectado viewHolderInfectadoSelecionado = null;
+
+
+    public class ViewHolderInfectado extends RecyclerView.ViewHolder implements View.OnClickListener{
         private InfectadoModel infectadoModel = null;
 
         private final TextView textViewInfectado;
@@ -62,6 +72,7 @@ public class AdaptadorInfectado extends RecyclerView.Adapter<AdaptadorInfectado.
             textViewInfectado = (TextView) itemView.findViewById(R.id.PositivoNegativoInfectado);
             textViewNomePessoa = (TextView) itemView.findViewById(R.id.NomeDaPessoaInfectado);
 
+            itemView.setOnClickListener(this);
 
         }
 
@@ -71,7 +82,32 @@ public class AdaptadorInfectado extends RecyclerView.Adapter<AdaptadorInfectado.
             textViewInfectado.setText(infectadoModel.getInfectado());
             textViewNomePessoa.setText(String.valueOf(infectadoModel.getNome_pessoa()));
         }
+
+
+        @Override
+        public void onClick(View v) {
+            if (viewHolderInfectadoSelecionado != null) {
+
+                viewHolderInfectadoSelecionado.desSeleciona();
+            }
+
+            viewHolderInfectadoSelecionado = this;
+
+
+            seleciona();
+
+        }
+
+        private void seleciona() {
+            itemView.setBackgroundResource(R.color.colorPrimaryDark);
+        }
+
+        private void desSeleciona() {
+            itemView.setBackgroundResource(android.R.color.white);
+        }
     }
+
+
 
 
 }
