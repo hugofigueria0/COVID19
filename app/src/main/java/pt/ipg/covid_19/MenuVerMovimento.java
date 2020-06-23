@@ -15,9 +15,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MenuVerMovimento extends AppCompatActivity {
+public class MenuVerMovimento extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-
+    public static final int ID_CURSOR_LOADER_MOVIMENTOS = 0;
+    private AdaptadorMovimentos adaptadorMovimentos;
+    private RecyclerView recyclerViewMovimento;
     private Menu menu;
 
     @Override
@@ -25,6 +27,14 @@ public class MenuVerMovimento extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_ver_movimento);
 
+        recyclerViewMovimento = (RecyclerView) findViewById(R.id.recyclerViewMovimentos);
+        adaptadorMovimentos = new AdaptadorMovimentos(this);
+        recyclerViewMovimento.setAdapter(adaptadorMovimentos);
+        recyclerViewMovimento.setLayoutManager(new LinearLayoutManager(this));
+
+        adaptadorMovimentos.setCursor(null);
+
+        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_MOVIMENTOS, null, this);
 
     }
 
@@ -55,4 +65,23 @@ public class MenuVerMovimento extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, @Nullable Bundle bundle) {
+        return new CursorLoader(this, CovidContentProvider.ENDERECO_MOVIMENTO, BdTabelaMovimento.TODOS, null, null, BdTabelaMovimento.CAMPO_HORA_ENTRADA);
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
+        adaptadorMovimentos.setCursor(data);
+    }
+
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        adaptadorMovimentos.setCursor(null);
+    }
+
 }
+
+
