@@ -25,18 +25,14 @@ public class menu_ver_pessoas extends AppCompatActivity  implements LoaderManage
     private RecyclerView recyclerViewPessoas;
     private Menu menu;
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_ver_pessoas);
 
 
-        getSupportLoaderManager().initLoader(ID_CURSOR_LOADER_PESSOAS, null, this);
+
+
         recyclerViewPessoas = (RecyclerView) findViewById(R.id.recyclerViewPessoas);
         adaptadorPessoas = new AdaptadorPessoas(this);
         recyclerViewPessoas.setAdapter(adaptadorPessoas);
@@ -45,7 +41,7 @@ public class menu_ver_pessoas extends AppCompatActivity  implements LoaderManage
 
         adaptadorPessoas.setCursor(null);
 
-        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_PESSOAS, null, this);
+
 
     }
 

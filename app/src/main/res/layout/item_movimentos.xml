@@ -18,28 +18,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/TipoPessoaMovimento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/TipoPessoas"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NomePessoaMovimento" />
-
-    <TextView
-        android:id="@+id/TipoNomeMovimento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="28dp"
-        android:text="Casado"
-        app:layout_constraintStart_toEndOf="@+id/TipoPessoaMovimento"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDadosNomeMovimento" />
-
-    <TextView
         android:id="@+id/textViewDadosNomeMovimento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,11 +43,11 @@
         android:id="@+id/textViewHoraSAidaMovimento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginLeft="156dp"
         android:layout_marginTop="28dp"
         android:text="Hora Saida:"
-        app:layout_constraintStart_toEndOf="@+id/TipoNomeMovimento"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDataEntradaMovimento" />
 
     <TextView

@@ -50,14 +50,24 @@ public class AdaptadorMovimentos extends RecyclerView.Adapter<AdaptadorMovimento
         return cursor.getCount();
     }
 
+    /*public MovimentoModel getMovimentoelecionado() {
+        if (viewHolderMovimentoSelecionado == null) return null;
+
+        return viewHolderMovimentoSelecionado.movimentoModel;
+
+    }*/
+
     private ViewHolderMovimento viewHolderMovimentoSelecionado = null;
 
-    public class ViewHolderMovimento extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+
+    public class ViewHolderMovimento extends RecyclerView.ViewHolder  {
         private MovimentoModel movimentoModel = null;
 
         private final TextView textViewDataEntrada;
         private final TextView textViewDataSaida;
         private final TextView textViewData;
+        private final TextView textViewNomePessoa;
 
         public ViewHolderMovimento(@NonNull View itemView) {
             super(itemView);
@@ -65,19 +75,21 @@ public class AdaptadorMovimentos extends RecyclerView.Adapter<AdaptadorMovimento
             textViewDataEntrada = (TextView)itemView.findViewById(R.id.dataEntradaEditar);
             textViewDataSaida = (TextView)itemView.findViewById(R.id.dataSaidaEditar);
             textViewData = (TextView)itemView.findViewById(R.id.selectDateEditar);
+            textViewNomePessoa = (TextView)itemView.findViewById(R.id.textViewDadosNomeMovimento);
 
-            itemView.setOnClickListener(this);
+          //  itemView.setOnClickListener(this);
         }
 
         public void setMovimento(MovimentoModel movimentoModel) {
             this.movimentoModel = movimentoModel;
 
-            textViewDataEntrada.setText(String.valueOf(movimentoModel.getHoraEntrada()));
-            textViewDataSaida.setText(String.valueOf(movimentoModel.getHoraSaida()));
-            textViewData.setText(String.valueOf(movimentoModel.getData()));
+            textViewDataEntrada.setText(movimentoModel.getHoraEntrada());
+            textViewDataSaida.setText(movimentoModel.getHoraSaida());
+            textViewData.setText(movimentoModel.getData());
+            textViewNomePessoa.setText(String.valueOf(movimentoModel.getNome_pessoa()));
         }
 
-        @Override
+       /* @Override
         public void onClick(View v) {
             if (viewHolderMovimentoSelecionado != null) {
                 viewHolderMovimentoSelecionado.desSeleciona();
@@ -98,7 +110,7 @@ public class AdaptadorMovimentos extends RecyclerView.Adapter<AdaptadorMovimento
 
         private void desSeleciona() {
             itemView.setBackgroundResource(android.R.color.white);
-        }
+        }*/
     }
 
 }
