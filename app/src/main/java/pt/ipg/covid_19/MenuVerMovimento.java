@@ -38,6 +38,15 @@ public class MenuVerMovimento extends AppCompatActivity implements LoaderManager
 
     }
 
+    public void atualizaOpcoesMenu() {
+        MovimentoModel movimentoModel = adaptadorMovimentos.getInfectadoSelecionado();
+
+        boolean mostraAlterarEliminar = (movimentoModel != null);
+        menu.findItem(R.id.action_more_Movimento).setVisible(mostraAlterarEliminar);
+        menu.findItem(R.id.action_more_MovimentoInserir).setVisible(mostraAlterarEliminar);
+
+    }
+
 
 
 

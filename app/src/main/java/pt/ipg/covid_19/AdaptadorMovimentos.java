@@ -49,7 +49,15 @@ public class AdaptadorMovimentos extends RecyclerView.Adapter<AdaptadorMovimento
         return cursor.getCount();
     }
 
-    public class ViewHolderMovimento extends RecyclerView.ViewHolder {
+    public MovimentoModel getInfectadoSelecionado() {
+        if (viewHolderMovimentoSelecionado == null) return null;
+
+        return viewHolderMovimentoSelecionado.movimentoModel;
+    }
+
+    private AdaptadorMovimentos.ViewHolderMovimento viewHolderMovimentoSelecionado = null;
+
+    public class ViewHolderMovimento extends RecyclerView.ViewHolder implements View.OnClickListener{
         private MovimentoModel movimentoModel = null;
 
         private final TextView textViewDadosNomeMovimento;
@@ -65,6 +73,8 @@ public class AdaptadorMovimentos extends RecyclerView.Adapter<AdaptadorMovimento
             textViewHoraSaidaMovimenbto = (TextView)itemView.findViewById(R.id.textViewHoraSaidaMovimenbto);
             textViewDataMovimento = (TextView)itemView.findViewById(R.id.textViewDataMovimento);
 
+            itemView.setOnClickListener(this);
+
 
         }
 
@@ -77,6 +87,28 @@ public class AdaptadorMovimentos extends RecyclerView.Adapter<AdaptadorMovimento
             textViewDataMovimento.setText(movimentoModel.getData());
         }
 
+
+        @Override
+        public void onClick(View v) {
+            if (viewHolderMovimentoSelecionado != null) {
+
+                viewHolderMovimentoSelecionado.desSeleciona();
+            }
+
+            viewHolderMovimentoSelecionado = this;
+
+            ((MenuVerMovimento) context).atualizaOpcoesMenu();
+
+            seleciona();
+        }
+
+        private void seleciona() {
+            itemView.setBackgroundResource(R.color.colorPrimaryDark);
+        }
+
+        private void desSeleciona() {
+            itemView.setBackgroundResource(android.R.color.white);
+        }
     }
 
 }
