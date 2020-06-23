@@ -43,9 +43,14 @@ public class MenuVerMovimento extends AppCompatActivity implements LoaderManager
         MovimentoModel movimentoModel = adaptadorMovimentos.getMovimentoSelecionado();
 
         boolean mostraAlterarEliminar = (movimentoModel != null);
-        menu.findItem(R.id.action_more_Movimento).setVisible(mostraAlterarEliminar);
         menu.findItem(R.id.action_more_MovimentoInserir).setVisible(mostraAlterarEliminar);
 
+    }
+
+    @Override
+    protected void onResume() {
+        getSupportLoaderManager().restartLoader(ID_CURSOR_LOADER_MOVIMENTOS, null, this);
+        super.onResume();
     }
 
 
@@ -65,7 +70,6 @@ public class MenuVerMovimento extends AppCompatActivity implements LoaderManager
 
         if (id == R.id.action_more_Movimento) {
             Intent intent = new Intent(this, MenuAdicionarMovimento.class);
-            intent.putExtra(ID_MOVIMENTO, adaptadorMovimentos.getMovimentoSelecionado().getId());
             startActivity(intent);
             return true;
         }if (id == R.id.action_more_MovimentoInserir) {

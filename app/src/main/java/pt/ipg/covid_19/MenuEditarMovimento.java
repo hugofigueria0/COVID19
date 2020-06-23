@@ -21,6 +21,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+
 import java.util.Calendar;
 
 public class MenuEditarMovimento extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
@@ -46,10 +49,6 @@ public class MenuEditarMovimento extends AppCompatActivity implements LoaderMana
 
         editTextEditarMovimentoData = (EditText) findViewById(R.id.dataEntradaEditar);
         editTextEditarMovimentoSair = (EditText) findViewById(R.id.dataSaidaEditar);
-
-
-
-
         mDisplayDate = (TextView) findViewById(R.id.selectDateEditar);
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
@@ -80,35 +79,6 @@ public class MenuEditarMovimento extends AppCompatActivity implements LoaderMana
                 mDisplayDate.setText(date);
             }
         };
-
-        getSupportLoaderManager().initLoader(ID_CURSOR_LOADER_MOVIMENTOS, null, this);
-
-        Intent intent = getIntent();
-
-        long idMovimento= intent.getLongExtra(MenuVerMovimento.ID_MOVIMENTO,-1);
-
-        if(idMovimento == -1){
-            Toast.makeText(this, "Erro: não foi possivel ler o Movimento!", Toast.LENGTH_LONG ).show();
-            finish();
-            return;
-        }
-
-        enderecoMovimentoEditar = Uri.withAppendedPath(CovidContentProvider.ENDERECO_MOVIMENTO, String.valueOf(idMovimento));
-
-        Cursor cursor = getContentResolver().query(enderecoMovimentoEditar, BdTabelaMovimento.TODOS, null, null, null);
-
-        if(!cursor.moveToNext()){
-            Toast.makeText(this,"Erro não foi possivel ler o Movimento!!", Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
-
-        movimentoModel = MovimentoModel.fromCursor(cursor);
-
-        editTextEditarMovimentoData.setText(movimentoModel.getHoraEntrada());
-        editTextEditarMovimentoSair.setText(movimentoModel.getHoraSaida());
-        mDisplayDate.setText(movimentoModel.getData());
-
 
 
 
@@ -149,16 +119,7 @@ public class MenuEditarMovimento extends AppCompatActivity implements LoaderMana
 
 
 
-        try {
-            getContentResolver().update(enderecoMovimentoEditar, movimentoModel.getContentValues(), null, null);
 
-            Toast.makeText(this, ("Deu certo ?!?"), Toast.LENGTH_SHORT).show();
-            finish();
-
-        } catch (Exception e) {
-            Toast.makeText(this,("correu ?!?!?!"), Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
 
 
         Toast.makeText(this, R.string.Sucesso, Toast.LENGTH_LONG).show();
@@ -171,10 +132,10 @@ public class MenuEditarMovimento extends AppCompatActivity implements LoaderMana
 
     @NonNull
     @Override
-    public Loader<Cursor> onCreateLoader(int i, @Nullable Bundle bundle) {
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
         return new CursorLoader(this, CovidContentProvider.ENDERECO_MOVIMENTO, BdTabelaMovimento.TODOS, null, null, BdTabelaMovimento.CAMPO_HORA_ENTRADA);
-
     }
+
 
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {

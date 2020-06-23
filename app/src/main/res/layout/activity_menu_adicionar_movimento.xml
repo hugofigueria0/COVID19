@@ -51,14 +51,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
         android:layout_marginLeft="44dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="52dp"
         android:digits="1234567890:"
         android:ems="10"
         android:inputType="numberDecimal"
         android:maxLength="5"
-        app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@+id/TextoDoTempo" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NomePessoaSpinner" />
 
     <EditText
         android:id="@+id/DataSaida"
@@ -84,14 +84,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="88dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Select Date"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toEndOf="@+id/DataEntrada"
+        app:layout_constraintTop_toBottomOf="@+id/NomePessoaSpinner" />
+
+    <Spinner
+        android:id="@+id/NomePessoaSpinner"
+        android:layout_width="281dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextoDoTempo" />
 
 </android.support.constraint.ConstraintLayout>
