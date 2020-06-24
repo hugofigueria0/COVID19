@@ -3,7 +3,9 @@ package pt.ipg.covid_19;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-public class MovimentoModel {
+import java.io.Serializable;
+
+public class MovimentoModel implements Serializable {
 
     private long id = -1;
     private String horaEntrada;
@@ -60,51 +62,5 @@ public class MovimentoModel {
         this.data = data;
     }
 
-    public ContentValues getContentValues(){
-        ContentValues valores = new ContentValues();
-        valores.put(BdTabelaMovimento.CAMPO_HORA_ENTRADA, horaEntrada);
-        valores.put(BdTabelaMovimento.CAMPO_HORA_SAIDA, horaSaida);
-        valores.put(BdTabelaMovimento.CAMPO_DATA, data);
 
-
-        return valores;
-    }
-
-    public static MovimentoModel fromCursor(Cursor cursor){
-
-        long id = cursor.getLong(
-                cursor.getColumnIndex(BdTabelaMovimento._ID)
-        );
-
-        String DataEntrada = cursor.getString(
-                cursor.getColumnIndex(BdTabelaMovimento.CAMPO_HORA_ENTRADA)
-        );
-
-        String DataSaida = cursor.getString(
-                cursor.getColumnIndex(BdTabelaMovimento.CAMPO_HORA_SAIDA)
-        );
-
-        String Data = cursor.getString(
-                cursor.getColumnIndex(BdTabelaMovimento.CAMPO_DATA)
-        );
-        String Nome = cursor.getString( cursor.getColumnIndex(BdTabelaMovimento.CAMPO_PESSOA));
-
-
-        long idPessoa = cursor.getLong(
-                cursor.getColumnIndex(BdTabelaMovimento.CAMPO_ID_PESSOA)
-        );
-
-
-        MovimentoModel movimentoModel = new MovimentoModel();
-
-        movimentoModel.setId(id);
-        movimentoModel.setHoraEntrada(DataEntrada);
-        movimentoModel.setHoraSaida(DataSaida);
-        movimentoModel.setData(Data);
-        movimentoModel.setId_pessoa(idPessoa);
-        movimentoModel.setNome_pessoa(Nome);
-
-
-        return movimentoModel;
-    }
 }

@@ -96,10 +96,11 @@ public class AdaptadorMovimentos extends RecyclerView.Adapter<AdaptadorMovimento
             }
 
             viewHolderMovimentoSelecionado = this;
-
-            ((MenuVerMovimento) context).atualizaOpcoesMenu();
-
             seleciona();
+
+            MenuVerMovimento activity = (MenuVerMovimento) AdaptadorMovimentos.this.context;
+            activity.movimentoAlterado(movimentoModel);
+
         }
 
         private void seleciona() {

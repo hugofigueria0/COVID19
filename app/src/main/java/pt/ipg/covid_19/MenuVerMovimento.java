@@ -22,6 +22,7 @@ public class MenuVerMovimento extends AppCompatActivity implements LoaderManager
     private AdaptadorMovimentos adaptadorMovimentos;
     private RecyclerView recyclerViewMovimento;
     private Menu menu;
+    private MovimentoModel movimentoModel = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +40,15 @@ public class MenuVerMovimento extends AppCompatActivity implements LoaderManager
 
     }
 
-    public void atualizaOpcoesMenu() {
-        MovimentoModel movimentoModel = adaptadorMovimentos.getMovimentoSelecionado();
+    public void movimentoAlterado(MovimentoModel movimentoModel) {
+        this.movimentoModel = movimentoModel;
 
-        boolean mostraAlterarEliminar = (movimentoModel != null);
-        menu.findItem(R.id.action_more_MovimentoInserir).setVisible(mostraAlterarEliminar);
+        boolean mostraEditarEliminar = (movimentoModel != null);
+
+        menu.findItem(R.id.action_more_MovimentoInserir).setVisible(mostraEditarEliminar);
 
     }
+
 
     @Override
     protected void onResume() {
@@ -74,7 +77,9 @@ public class MenuVerMovimento extends AppCompatActivity implements LoaderManager
             return true;
         }if (id == R.id.action_more_MovimentoInserir) {
             Intent intent = new Intent(this, MenuEditarMovimento.class);
-            intent.putExtra(ID_MOVIMENTO, adaptadorMovimentos.getMovimentoSelecionado().getId());
+
+            intent.putExtra("Movimento", movimentoModel);
+
             startActivity(intent);
             return true;
         }

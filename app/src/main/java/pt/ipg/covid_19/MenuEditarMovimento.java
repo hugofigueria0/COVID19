@@ -28,7 +28,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.Calendar;
 
-public class MenuEditarMovimento extends AppCompatActivity{
+public class MenuEditarMovimento extends AppCompatActivity  implements LoaderManager.LoaderCallbacks<Cursor>{
 
     private static final int ID_CURSOR_LOADER_PESSOAS = 0;
 
@@ -42,9 +42,10 @@ public class MenuEditarMovimento extends AppCompatActivity{
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private Spinner BuscarPessoaspinner;
 
+    private boolean pessoasCarregadas = false;
+    private boolean pessoasAtualizada = false;
+
     private Uri enderecPessoasEditar;
-
-
 
 
     @Override
@@ -56,7 +57,7 @@ public class MenuEditarMovimento extends AppCompatActivity{
         BuscarPessoaspinner = (Spinner) findViewById(R.id.BuscarPessoaspinner);
         editTextEditarMovimentoData = (EditText) findViewById(R.id.dataEntradaEditar);
         editTextEditarMovimentoSair = (EditText) findViewById(R.id.dataSaidaEditar);
-       mDisplayDate = (TextView) findViewById(R.id.selectDateEditar);
+        mDisplayDate = (TextView) findViewById(R.id.selectDateEditar);
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,34 +88,50 @@ public class MenuEditarMovimento extends AppCompatActivity{
             }
         };
 
+        mostraDadosSpinnerPessoas(null);
+
         Intent intent = getIntent();
 
-        long idMovimento = intent.getLongExtra(MenuVerMovimento.ID_MOVIMENTO ,-1);
-
-        if(idMovimento == -1){
-            Toast.makeText(this, "Erro: não foi possivel ler a despesa!", Toast.LENGTH_LONG ).show();
-            finish();
-            return;
-        }
-
-        enderecPessoasEditar = Uri.withAppendedPath(CovidContentProvider.ENDERECO_MOVIMENTO, String.valueOf(idMovimento));
-
-        Cursor cursor = getContentResolver().query(enderecPessoasEditar, BdTabelaMovimento.TODOS, null, null, null);
-
-        if(!cursor.moveToNext()){
-            Toast.makeText(this,"Erro não foi possivel ler a despesa!!", Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
-
-        movimentoModel = MovimentoModel.fromCursor(cursor);
-
+        movimentoModel = (MovimentoModel) intent.getSerializableExtra("Movimento");
         editTextEditarMovimentoData.setText(movimentoModel.getHoraEntrada());
         editTextEditarMovimentoSair.setText(movimentoModel.getHoraSaida());
-        //mDisplayDate.setText(movimentoModel.getData());
+        mDisplayDate.setText(movimentoModel.getData());
+
+
+        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_PESSOAS, null, this);
+
+        actualizaPessoasSelecionada();
 
 
 
+    }
+
+    private void actualizaPessoasSelecionada() {
+        if (!pessoasCarregadas) return;
+        if (pessoasAtualizada) return;
+
+        long idPessoa = movimentoModel.getId_pessoa();
+
+        for (int i= 0; i < BuscarPessoaspinner.getCount(); i++) {
+            if (BuscarPessoaspinner.getItemIdAtPosition(i) == idPessoa) {
+                BuscarPessoaspinner.setSelection(i, true);
+                break;
+            }
+        }
+
+        pessoasAtualizada = true;
+    }
+
+    private void mostraDadosSpinnerPessoas(Cursor data) {
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+                this,
+                android.R.layout.simple_list_item_1,
+                data,
+                new String[]{BdTabelaPessoas.CAMPO_NOME},
+                new int[]{android.R.id.text1}
+        );
+
+        BuscarPessoaspinner.setAdapter(adapter);
     }
 
 
@@ -127,6 +144,7 @@ public class MenuEditarMovimento extends AppCompatActivity{
         String ConteudoDaDataSaida = editTextEditarMovimentoSair.getText().toString();
         String ConteudoDaData= mDisplayDate.getText().toString();
 
+        long idPessoa = BuscarPessoaspinner.getSelectedItemId();
 
 
         if (ConteudoDaDataEntrada.trim().isEmpty()){
@@ -143,17 +161,25 @@ public class MenuEditarMovimento extends AppCompatActivity{
 
         }
 
-        String dataEntrada = editTextEditarMovimentoData.getText().toString();
-        String dataSaida = editTextEditarMovimentoSair.getText().toString();
-        String data = mDisplayDate.getText().toString();
+        movimentoModel.setHoraEntrada(ConteudoDaDataEntrada);
+        movimentoModel.setHoraSaida(ConteudoDaDataSaida);
+        movimentoModel.setData(ConteudoDaData);
+        movimentoModel.setId_pessoa(idPessoa);
+
+        try {
+            Uri enderecoMovimento= Uri.withAppendedPath(CovidContentProvider.ENDERECO_MOVIMENTO, String.valueOf(movimentoModel.getId()));
+
+            int registos = this.getContentResolver().update(enderecoMovimento, Converte.movimentosToContentValues(movimentoModel), null, null);
+
+            if (registos == 1) {
+                Toast.makeText(this, "Livro guardado com sucesso", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
+        } catch (Exception e) {
+        }
 
 
-
-
-
-
-        Toast.makeText(this, R.string.Sucesso, Toast.LENGTH_LONG).show();
-        finish();
     }
 
     public void CancelarEditarMovimento(View view){
@@ -161,4 +187,21 @@ public class MenuEditarMovimento extends AppCompatActivity{
     }
 
 
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+        return new CursorLoader(this, CovidContentProvider.ENDERECO_PESSOAS, BdTabelaPessoas.TODOS, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
+        mostraDadosSpinnerPessoas(data);
+        pessoasCarregadas = true;
+        actualizaPessoasSelecionada();
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        mostraDadosSpinnerPessoas(null);
+    }
 }
