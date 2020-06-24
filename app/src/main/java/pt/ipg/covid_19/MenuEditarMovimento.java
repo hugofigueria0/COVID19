@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +28,9 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.Calendar;
 
-public class MenuEditarMovimento extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class MenuEditarMovimento extends AppCompatActivity{
 
-    private static final int ID_CURSOR_LOADER_MOVIMENTOS = 0;
+    private static final int ID_CURSOR_LOADER_PESSOAS = 0;
 
     private MovimentoModel movimentoModel;
 
@@ -38,8 +40,12 @@ public class MenuEditarMovimento extends AppCompatActivity implements LoaderMana
 
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private Spinner BuscarPessoaspinner;
 
-    private Uri enderecoMovimentoEditar;
+    private Uri enderecPessoasEditar;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +53,10 @@ public class MenuEditarMovimento extends AppCompatActivity implements LoaderMana
         setContentView(R.layout.activity_menu_editar_movimento);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        BuscarPessoaspinner = (Spinner) findViewById(R.id.BuscarPessoaspinner);
         editTextEditarMovimentoData = (EditText) findViewById(R.id.dataEntradaEditar);
         editTextEditarMovimentoSair = (EditText) findViewById(R.id.dataSaidaEditar);
-        mDisplayDate = (TextView) findViewById(R.id.selectDateEditar);
+       mDisplayDate = (TextView) findViewById(R.id.selectDateEditar);
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,9 +87,39 @@ public class MenuEditarMovimento extends AppCompatActivity implements LoaderMana
             }
         };
 
+        Intent intent = getIntent();
+
+        long idMovimento = intent.getLongExtra(MenuVerMovimento.ID_MOVIMENTO ,-1);
+
+        if(idMovimento == -1){
+            Toast.makeText(this, "Erro: não foi possivel ler a despesa!", Toast.LENGTH_LONG ).show();
+            finish();
+            return;
+        }
+
+        enderecPessoasEditar = Uri.withAppendedPath(CovidContentProvider.ENDERECO_MOVIMENTO, String.valueOf(idMovimento));
+
+        Cursor cursor = getContentResolver().query(enderecPessoasEditar, BdTabelaMovimento.TODOS, null, null, null);
+
+        if(!cursor.moveToNext()){
+            Toast.makeText(this,"Erro não foi possivel ler a despesa!!", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+
+        movimentoModel = MovimentoModel.fromCursor(cursor);
+
+        editTextEditarMovimentoData.setText(movimentoModel.getHoraEntrada());
+        editTextEditarMovimentoSair.setText(movimentoModel.getHoraSaida());
+        //mDisplayDate.setText(movimentoModel.getData());
+
 
 
     }
+
+
+
+
 
     public void EditarDataMovimento(View view){
 
@@ -110,13 +147,6 @@ public class MenuEditarMovimento extends AppCompatActivity implements LoaderMana
         String dataSaida = editTextEditarMovimentoSair.getText().toString();
         String data = mDisplayDate.getText().toString();
 
-        // save the data
-        MovimentoModel movimentoModel = new MovimentoModel();
-
-        movimentoModel.setHoraEntrada(dataEntrada);
-        movimentoModel.setHoraSaida(dataSaida);
-        movimentoModel.setData(data);
-
 
 
 
@@ -130,20 +160,5 @@ public class MenuEditarMovimento extends AppCompatActivity implements LoaderMana
         finish();
     }
 
-    @NonNull
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return new CursorLoader(this, CovidContentProvider.ENDERECO_MOVIMENTO, BdTabelaMovimento.TODOS, null, null, BdTabelaMovimento.CAMPO_HORA_ENTRADA);
-    }
 
-
-    @Override
-    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
-
-    }
-
-    @Override
-    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-
-    }
 }

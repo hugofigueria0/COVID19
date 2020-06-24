@@ -38,4 +38,6 @@ public class InfectadoModel {
     public void setNome_pessoa(String nome_pessoa) {
         this.nome_pessoa = nome_pessoa;
     }
+
+
 }

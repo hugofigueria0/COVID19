@@ -10,13 +10,13 @@
         android:id="@+id/selectDateEditar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
         android:text="Select Date"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/BuscarPessoaspinner" />
 
     <EditText
         android:id="@+id/dataEntradaEditar"
@@ -24,15 +24,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="88dp"
-        android:digits="1234567890:"
+        android:layout_marginTop="60dp"
 
+        android:digits="1234567890:"
         android:ems="10"
         android:hint="Change hour"
         android:inputType="numberDecimal"
         android:maxLength="5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/BuscarPessoaspinner" />
 
     <EditText
         android:id="@+id/dataSaidaEditar"
@@ -84,4 +84,13 @@
         android:text="Cancelar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dataSaidaEditar" />
+
+    <Spinner
+        android:id="@+id/BuscarPessoaspinner"
+        android:layout_width="205dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 </android.support.constraint.ConstraintLayout>

@@ -12,11 +12,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginLeft="36dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="36dp"
         android:onClick="GuardarInfectado"
         android:text="@string/Guardar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintHorizontal_bias="0.689"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerInfectado" />
 
@@ -24,11 +24,11 @@
         android:id="@+id/spinnerInfectado"
         android:layout_width="252dp"
         android:layout_height="69dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.358"
+        app:layout_constraintHorizontal_bias="0.44"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Infectado" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerBuscarPessoas" />
 
     <TextView
         android:id="@+id/Infectado"
@@ -41,4 +41,14 @@
         app:layout_constraintHorizontal_bias="0.257"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerBuscarPessoas"
+        android:layout_width="250dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Infectado" />
 </android.support.constraint.ConstraintLayout>

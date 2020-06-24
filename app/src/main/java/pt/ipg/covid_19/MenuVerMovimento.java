@@ -74,6 +74,7 @@ public class MenuVerMovimento extends AppCompatActivity implements LoaderManager
             return true;
         }if (id == R.id.action_more_MovimentoInserir) {
             Intent intent = new Intent(this, MenuEditarMovimento.class);
+            intent.putExtra(ID_MOVIMENTO, adaptadorMovimentos.getMovimentoSelecionado().getId());
             startActivity(intent);
             return true;
         }

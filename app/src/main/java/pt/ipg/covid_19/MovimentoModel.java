@@ -87,6 +87,12 @@ public class MovimentoModel {
         String Data = cursor.getString(
                 cursor.getColumnIndex(BdTabelaMovimento.CAMPO_DATA)
         );
+        String Nome = cursor.getString( cursor.getColumnIndex(BdTabelaMovimento.CAMPO_PESSOA));
+
+
+        long idPessoa = cursor.getLong(
+                cursor.getColumnIndex(BdTabelaMovimento.CAMPO_ID_PESSOA)
+        );
 
 
         MovimentoModel movimentoModel = new MovimentoModel();
@@ -95,6 +101,8 @@ public class MovimentoModel {
         movimentoModel.setHoraEntrada(DataEntrada);
         movimentoModel.setHoraSaida(DataSaida);
         movimentoModel.setData(Data);
+        movimentoModel.setId_pessoa(idPessoa);
+        movimentoModel.setNome_pessoa(Nome);
 
 
         return movimentoModel;

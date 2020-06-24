@@ -43,6 +43,11 @@ public class MenuVerInfectados extends AppCompatActivity implements LoaderManage
 
     }
 
+    @Override
+    protected void onResume() {
+        getSupportLoaderManager().restartLoader(ID_CURSOR_LOADER_INFECTADO, null, this);
+        super.onResume();
+    }
 
 
     @Override
