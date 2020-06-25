@@ -88,6 +88,11 @@ public class MenuAdicionarInfectado extends AppCompatActivity implements Adapter
         finish();
     }
 
+    public void RegressarParaTras(View view){
+        Toast.makeText(this, R.string.Regressar, Toast.LENGTH_LONG).show();
+        finish();
+    }
+
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {

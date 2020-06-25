@@ -104,7 +104,7 @@ public class AdaptadorMovimentos extends RecyclerView.Adapter<AdaptadorMovimento
         }
 
         private void seleciona() {
-        itemView.setBackgroundResource(R.color.colorPrimaryDark);
+        itemView.setBackgroundResource(R.color.colorSelecionado);
     }
 
     private void desSeleciona() {

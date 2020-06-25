@@ -99,7 +99,7 @@ public class AdaptadorInfectado extends RecyclerView.Adapter<AdaptadorInfectado.
         }
 
         private void seleciona() {
-            itemView.setBackgroundResource(R.color.colorPrimaryDark);
+            itemView.setBackgroundResource(R.color.colorSelecionado);
         }
 
         private void desSeleciona() {
