@@ -98,7 +98,7 @@ public class AdaptadorPessoas extends RecyclerView.Adapter<AdaptadorPessoas.View
         }
 
         private void seleciona() {
-            itemView.setBackgroundResource(R.color.colorPrimaryDark);
+            itemView.setBackgroundResource(R.color.colorSelecionado);
         }
 
         private void desSeleciona() {

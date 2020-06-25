@@ -2,7 +2,7 @@
     <string name="app_name">COVID-19</string>
     <string name="BemVindo">Welcome</string>
     <string name="Pessoas">People</string>
-    <string name="Resgitar">Registe</string>
+    <string name="Resgitar">Register</string>
     <string name="Movimentos">Movement</string>
     <string name="Infetados">Infected</string>
     <string name="Sair">Leave</string>
@@ -48,4 +48,5 @@
     <string name="HoraEntrada">Check-in Time</string>
     <string name="HoraSaida">Time left</string>
     <string name="Data">Date</string>
+    <string name="ApagarPessoa">Delete person</string>
 </resources>

@@ -45,4 +45,5 @@
     <string name="HoraEntrada">Hora de entrada</string>
     <string name="HoraSaida">Hora de saida</string>
     <string name="Data">Data</string>
+    <string name="ApagarPessoa">Apagar pessoa</string>
 </resources>
