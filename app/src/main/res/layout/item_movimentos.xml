@@ -13,7 +13,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="16dp"
-        android:text="Name"
+        android:text="@string/Nome"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,7 +36,7 @@
         android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="36dp"
-        android:text="Hora Entrada:"
+        android:text="@string/HoraEntrada"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NomePessoaMovimento"
@@ -49,7 +49,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
-        android:text="Hora Saida:"
+        android:text="@string/HoraSaida"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDataEntradaMovimento" />
 
@@ -61,7 +61,7 @@
         android:layout_marginLeft="52dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="8dp"
-        android:text="Data:"
+        android:text="@string/Data"
         app:layout_constraintBottom_toTopOf="@+id/textViewHoraEntradaMovimento"
         app:layout_constraintStart_toEndOf="@+id/textViewDadosNomeMovimento"
         app:layout_constraintTop_toTopOf="parent"

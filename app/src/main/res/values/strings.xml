@@ -37,4 +37,15 @@
     <string name="EntrouRegistoInfectados">You are in the menu to register the infected person</string>
     <string name="SaiuDaApp">You leave app \"COVID19\"</string>
     <string name="Regressar">Came back</string>
+    <string name="EstaPessoaTemCovid">Record whether the person has COVID19 or not</string>
+    <string name="PonhaHoraEntrada">Put time of entry</string>
+    <string name="PonhaHoraSaida">Put time out</string>
+    <string name="EscolhaData">Select Date</string>
+    <string name="AdicionarMovimento">Add movement</string>
+    <string name="EditarMovimento">Edit the movement</string>
+    <string name="ApagarBotao">Delete</string>
+    <string name="Infectado">Infected</string>
+    <string name="HoraEntrada">Check-in Time</string>
+    <string name="HoraSaida">Time left</string>
+    <string name="Data">Date</string>
 </resources>

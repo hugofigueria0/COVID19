@@ -12,11 +12,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginLeft="36dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="40dp"
         android:onClick="GuardarInfectado"
         android:text="@string/Guardar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.689"
+        app:layout_constraintHorizontal_bias="0.682"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerInfectado" />
 
@@ -32,13 +32,13 @@
 
     <TextView
         android:id="@+id/Infectado"
-        android:layout_width="190dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="116dp"
-        android:text="Tem Covid?"
+        android:layout_width="339dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="45dp"
+        android:text="@string/EstaPessoaTemCovid"
         android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.257"
+        app:layout_constraintHorizontal_bias="0.222"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,7 +46,7 @@
         android:id="@+id/spinnerBuscarPessoas"
         android:layout_width="250dp"
         android:layout_height="66dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent"
