@@ -71,6 +71,7 @@ public class MenuPessoas extends AppCompatActivity  {
     }
 
     public void SairParaPrincipal(View view){
+        Toast.makeText(this, R.string.Regressar, Toast.LENGTH_LONG).show();
         finish();
     }
 }

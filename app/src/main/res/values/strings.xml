@@ -23,4 +23,18 @@
         <item> Positivo </item>
         <item> Negativo </item>
     </string-array>
+    <string name="AdicionarPessoa">Add person</string>
+    <string name="MovimentoEditado">Successfully changed</string>
+    <string name="OcorreuErro">Error: Try again later</string>
+    <string name="ApagadoComSucesso">Successfully delete</string>
+    <string name="DeletePessoa">Delete person</string>
+    <string name="AvisoDeletePessoa">Are you sure you want to delete?</string>
+    <string name="SimDelete">Yes, delete</string>
+    <string name="NaoDelete">No, canceled</string>
+    <string name="Cancelado">Canceled</string>
+    <string name="EntrouRegistoPessoas">You are in the people registration menu</string>
+    <string name="EntrouRegistoMovimentos">It is in the people movement registration menu</string>
+    <string name="EntrouRegistoInfectados">You are in the menu to register the infected person</string>
+    <string name="SaiuDaApp">You leave app \"COVID19\"</string>
+    <string name="Regressar">Came back</string>
 </resources>

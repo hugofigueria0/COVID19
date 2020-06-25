@@ -77,14 +77,14 @@ public class MenuAdicionarInfectado extends AppCompatActivity implements Adapter
         try {
 
             this.getContentResolver().insert(CovidContentProvider.ENDERECO_INFECTADO, Converte.infectadosToContentValues(infectadoModel));
-            Toast.makeText(this, "Infectado adicionado com sucesso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.Sucesso, Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
-            Toast.makeText(this, "Infectado adicionado com sucesso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.OcorreuErro, Toast.LENGTH_SHORT).show();
         }
 
 
-        Toast.makeText(this, R.string.Sucesso, Toast.LENGTH_LONG).show();
+
         finish();
     }
 

@@ -47,7 +47,7 @@ public class MenuPessoasEditar extends AppCompatActivity implements LoaderManage
         long idPessoa = intent.getLongExtra(menu_ver_pessoas.ID_PESSOAS,-1);
 
         if(idPessoa == -1){
-            Toast.makeText(this, "Erro: não foi possivel ler o carro!", Toast.LENGTH_LONG ).show();
+            Toast.makeText(this, R.string.OcorreuErro, Toast.LENGTH_LONG ).show();
             finish();
             return;
         }
@@ -57,7 +57,7 @@ public class MenuPessoasEditar extends AppCompatActivity implements LoaderManage
         Cursor cursor = getContentResolver().query(enderecoPessoaEditar, BdTabelaPessoas.TODOS, null, null, null);
 
         if(!cursor.moveToNext()){
-            Toast.makeText(this,"Erro não foi possivel ler o Carro!!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,R.string.OcorreuErro, Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -105,11 +105,11 @@ public class MenuPessoasEditar extends AppCompatActivity implements LoaderManage
         try {
             getContentResolver().update( enderecoPessoaEditar, pessoasModel.getContentValues(), null, null);
 
-            Toast.makeText(this, ("ALGO CERTO"), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, (R.string.MovimentoEditado), Toast.LENGTH_SHORT).show();
             finish();
 
         } catch (Exception e) {
-            Toast.makeText(this,("correu ?!?!?!"), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,(R.string.OcorreuErro), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
@@ -117,6 +117,7 @@ public class MenuPessoasEditar extends AppCompatActivity implements LoaderManage
     }
 
     public void SairEditparaPrincipal(View view){
+        Toast.makeText(this, R.string.Regressar, Toast.LENGTH_LONG).show();
         finish();
     }
 

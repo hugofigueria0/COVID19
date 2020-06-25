@@ -125,21 +125,19 @@ public class MenuAdicionarMovimento extends AppCompatActivity implements LoaderM
         try {
 
             this.getContentResolver().insert(CovidContentProvider.ENDERECO_MOVIMENTO, Converte.movimentosToContentValues(movimentoModel));
-            Toast.makeText(this, "Livro adicionado com sucesso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.Sucesso, Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
-            Toast.makeText(this, "Livro adicionado com sucesso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.OcorreuErro, Toast.LENGTH_SHORT).show();
         }
 
 
 
-
-
-        Toast.makeText(this, R.string.Sucesso, Toast.LENGTH_LONG).show();
         finish();
     }
 
     public void SairParaMovimento(View view){
+        Toast.makeText(this, R.string.Regressar, Toast.LENGTH_LONG).show();
         finish();
     }
 

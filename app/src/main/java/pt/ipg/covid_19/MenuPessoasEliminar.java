@@ -53,7 +53,7 @@ public class MenuPessoasEliminar extends AppCompatActivity implements LoaderMana
         long idPessoa = intent.getLongExtra(menu_ver_pessoas.ID_PESSOAS,-1);
 
         if(idPessoa == -1){
-            Toast.makeText(this, "Erro: não foi possivel ler o carro!", Toast.LENGTH_LONG ).show();
+            Toast.makeText(this, R.string.OcorreuErro, Toast.LENGTH_LONG ).show();
             finish();
             return;
         }
@@ -63,7 +63,7 @@ public class MenuPessoasEliminar extends AppCompatActivity implements LoaderMana
         Cursor cursor = getContentResolver().query(enderecoPessoaEliminar, BdTabelaPessoas.TODOS, null, null, null);
 
         if(!cursor.moveToNext()){
-            Toast.makeText(this,"Erro não foi possivel ler o Pessoa!!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,R.string.OcorreuErro, Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -81,20 +81,20 @@ public class MenuPessoasEliminar extends AppCompatActivity implements LoaderMana
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setTitle("Eliminar Livro");
-        builder.setMessage("Tem a certeza que pretende eliminar o livro '" + pessoasModel.getNome() + "'");
+        builder.setTitle(R.string.DeletePessoa);
+        builder.setMessage("Are you sure you want to delete? '" + pessoasModel.getNome() + "'");
         builder.setIcon(R.drawable.ic_delete_black_24dp);
-        builder.setPositiveButton("Sim, eliminar", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.SimDelete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 EliminarPessoa();
             }
         });
 
-        builder.setNegativeButton("Não, cancelar", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.NaoDelete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // cancelar
+                finish();
             }
         });
 
@@ -105,10 +105,10 @@ public class MenuPessoasEliminar extends AppCompatActivity implements LoaderMana
          int PessoasApagadas = getContentResolver().delete(enderecoPessoaEliminar, null, null);
 
          if (PessoasApagadas == 1) {
-             Toast.makeText(this, "Apagado com sucesso", Toast.LENGTH_SHORT).show();
+             Toast.makeText(this, R.string.ApagadoComSucesso, Toast.LENGTH_SHORT).show();
              finish();
          } else {
-             Toast.makeText(this, "aconteceu", Toast.LENGTH_LONG).show();
+             Toast.makeText(this, R.string.OcorreuErro, Toast.LENGTH_LONG).show();
          }
 
      }
@@ -117,7 +117,7 @@ public class MenuPessoasEliminar extends AppCompatActivity implements LoaderMana
 
     public void Leave(View view){
         finish();
-        Toast.makeText(this, "Cancelado", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.Cancelado, Toast.LENGTH_SHORT).show();
     }
 
     @NonNull

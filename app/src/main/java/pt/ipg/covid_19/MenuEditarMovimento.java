@@ -172,7 +172,7 @@ public class MenuEditarMovimento extends AppCompatActivity  implements LoaderMan
             int registos = this.getContentResolver().update(enderecoMovimento, Converte.movimentosToContentValues(movimentoModel), null, null);
 
             if (registos == 1) {
-                Toast.makeText(this, "Livro guardado com sucesso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.MovimentoEditado, Toast.LENGTH_SHORT).show();
                 finish();
                 return;
             }
@@ -183,6 +183,7 @@ public class MenuEditarMovimento extends AppCompatActivity  implements LoaderMan
     }
 
     public void CancelarEditarMovimento(View view){
+        Toast.makeText(this, R.string.Regressar, Toast.LENGTH_LONG).show();
         finish();
     }
 
