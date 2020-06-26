@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 public class Converte {
+    // guardar registo
 
     // TABELA PESSOAS
     public static ContentValues pessoasToContentValues(PessoasModel pessoasModel) {
