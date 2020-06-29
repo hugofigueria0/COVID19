@@ -2,4 +2,4 @@ O que pretendo fazer com o tema COVID-19, consiste em uma aplicação que a pess
 
 
 
-![alt text]( https://github.com/hugofigueria0/COVID19/blob/master/54dbd300e91965bee4c6a64d7690700a.png)  
+![alt text]( https://github.com/hugofigueria0/COVID19/blob/master/4747d3341fa574bdd2f25fc754a8dca4.png)  
